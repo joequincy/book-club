@@ -8,7 +8,7 @@ RSpec.describe "user index", type: :feature do
     ab_1 = AuthorBook.create(author_id: author_1.id, book_id: book_1.id)
     ab_2 = AuthorBook.create(author_id: author_1.id, book_id: book_2.id)
 
-    visit '/books'
+    visit books_path
 
     expect(page).to have_content(author_1.name)
   end
