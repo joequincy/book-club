@@ -1,6 +1,8 @@
 <% @books.each do |book| %>
-  Title:  <%= book.title %><br />
-  Author: <%= book.authors.first.name %><br />
+  Title:  <%= link_to book.title, book_path(book) %><br />
+  Author: <% book.authors.each do |author| %>
+    <%= link_to author.name, author_path(author) %>
+  <% end %><br />
   Pages: <%= book.pages %><br />
   Year Published: <%= book.year_published %>
   <img src="<%= book.thumbnail %>" />
