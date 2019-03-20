@@ -10,3 +10,16 @@
     <img src="<%= book.thumbnail %>" />
   </div>
 <% end %>
+
+<div id='worst_books'>
+  <h6>Worst Books</h6>
+  <% @books.worst_3.each do |book| %>
+  <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
+  <% end %>
+</div>
+<div id='best_books'>
+  <h6>Best Books</h6>
+  <% @books.best_3.each do |book| %>
+  <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
+  <% end %>
+</div>
