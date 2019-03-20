@@ -1,5 +1,5 @@
 <% @books.each do |book| %>
-  Title:  <%= book.title %><br />
+  Title:  <%= link_to book.title, book_path(book) %><br />
   Author: <%= book.authors.first.name %><br />
   Pages: <%= book.pages %><br />
   Year Published: <%= book.year_published %>
