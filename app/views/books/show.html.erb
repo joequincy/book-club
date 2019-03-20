@@ -1,6 +1,6 @@
 Title:  <%= @book.title %><br />
 Author: <% @book.authors.each do |author| %>
-  <%= link_to author.name, author_path(author) %>
+  <%= author.name %>
 <% end %><br />
 Pages: <%= @book.pages %><br />
 Year Published: <%= @book.year_published %>
