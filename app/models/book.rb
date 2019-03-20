@@ -5,4 +5,9 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :pages, presence: true, numericality: { greater_than: 0 }
   validates :year_published, presence: true, numericality: { greater_than: 0 }
+
+  def average_rating
+    self.reviews.average(:rating)
+  end
+
 end
