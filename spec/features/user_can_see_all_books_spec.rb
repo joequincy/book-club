@@ -10,8 +10,6 @@ RSpec.describe "user index", type: :feature do
 
     visit '/books'
 
-    save_and_open_page
-
     expect(page).to have_content(book_1.title)
     expect(page).to have_content("Pages: #{book_1.pages}")
     expect(page).to have_content("Year Published: #{book_1.year_published}")
