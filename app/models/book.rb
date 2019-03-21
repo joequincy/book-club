@@ -10,7 +10,7 @@ class Book < ApplicationRecord
     query = self.select('books.*, AVG(reviews.rating) AS avg_rating')
                 .joins(:reviews)
                 .group('books.id')
-                .order('avg_rating ' + (args[:dir] ||= 'ASC'))
+                .order('avg_rating ' + (args[:dir] ||= 'DESC'))
     return query if args[:limit] === false
     query.limit(args[:limit] ||= 3)
   end
@@ -24,13 +24,13 @@ class Book < ApplicationRecord
   end
 
   def self.by_pages(*nils, **args)
-    self.order('pages ' + (args[:dir] ||= 'ASC'))
+    self.order('pages ' + (args[:dir] ||= 'DESC'))
   end
 
   def self.by_reviews(*nils, **args)
     self.left_joins(:reviews)
         .group(:id)
-        .order('COUNT(reviews.id) ' + (args[:dir] ||= 'ASC'))
+        .order('COUNT(reviews.id) ' + (args[:dir] ||= 'DESC'))
   end
 
   def average_rating

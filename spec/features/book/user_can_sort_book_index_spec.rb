@@ -66,7 +66,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by pages ascending' do
-    visit books_path(sort: 'pages')
+    visit books_path(sort: 'pages', direction: 'ASC')
 
     expected_order = [
       page.body.index('Inferno'),
@@ -81,7 +81,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by pages descending' do
-    visit books_path(sort: 'pages', direction: 'DESC')
+    visit books_path(sort: 'pages')
 
     expected_order = [
       page.body.index('Ringworld'),
@@ -96,7 +96,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by review count ascending' do
-    visit books_path(sort: 'reviews')
+    visit books_path(sort: 'reviews', direction: 'ASC')
 
     expected_order = [
       page.body.index('The Goliath Stone'),
@@ -112,7 +112,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by review count descending' do
-    visit books_path(sort: 'reviews', direction: 'DESC')
+    visit books_path(sort: 'reviews')
 
     expected_order = [
       page.body.index('The Return of the King'),
@@ -128,7 +128,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by average rating ascending' do
-    visit books_path(sort: 'rating')
+    visit books_path(sort: 'rating', direction: 'ASC')
 
     expected_order = [
       page.body.index('Inferno'),
@@ -143,7 +143,7 @@ RSpec.describe 'book index page statistics', type: :feature do
   end
 
   it 'sorts books by average rating descending' do
-    visit books_path(sort: 'rating', direction: 'DESC')
+    visit books_path(sort: 'rating')
 
     expected_order = [
       page.body.index('The Fellowship of the Ring'),
