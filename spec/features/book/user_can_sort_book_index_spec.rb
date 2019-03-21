@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'book index page statistics', type: :feature do
+RSpec.describe 'book index page sorting', type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
@@ -155,5 +155,16 @@ RSpec.describe 'book index page statistics', type: :feature do
     ]
 
     expect(expected_order).to eq(expected_order.sort)
+  end
+
+  it 'has links to sort by all options' do
+    visit books_path
+
+    expect(page).to have_link('Rating (descending)', href: books_path(sort: 'rating'))
+    expect(page).to have_link('Rating (ascending)', href: books_path(sort: 'rating', direction: 'ASC'))
+    expect(page).to have_link('Pages (descending)', href: books_path(sort: 'pages'))
+    expect(page).to have_link('Pages (ascending)', href: books_path(sort: 'pages', direction: 'ASC'))
+    expect(page).to have_link('Reviews (descending)', href: books_path(sort: 'reviews'))
+    expect(page).to have_link('Reviews (ascending)', href: books_path(sort: 'reviews', direction: 'ASC'))
   end
 end
