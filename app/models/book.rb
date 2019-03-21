@@ -6,6 +6,11 @@ class Book < ApplicationRecord
   validates :pages, presence: true, numericality: { greater_than: 0 }
   validates :year_published, presence: true, numericality: { greater_than: 0 }
 
+  def self.already_exists?(book)
+    book.title = book.title.titleize
+    self.exists?(title: book.title)
+  end
+
   def average_rating
     self.reviews.average(:rating)
   end
