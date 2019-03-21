@@ -82,7 +82,6 @@ RSpec.describe 'book index page statistics', type: :feature do
 
   it 'sorts books by pages descending' do
     visit books_path(sort: 'pages', direction: 'DESC')
-    save_and_open_page
 
     expected_order = [
       page.body.index('Ringworld'),
@@ -126,5 +125,35 @@ RSpec.describe 'book index page statistics', type: :feature do
 
     expect(expected_order.first).to eq(expected_order.sort.first)
     expect(expected_order.last).to eq(expected_order.sort.last)
+  end
+
+  it 'sorts books by average rating ascending' do
+    visit books_path(sort: 'rating')
+
+    expected_order = [
+      page.body.index('Inferno'),
+      page.body.index('Ringworld'),
+      page.body.index('The Goliath Stone'),
+      page.body.index('The Return of the King'),
+      page.body.index('The Two Towers'),
+      page.body.index('The Fellowship of the Ring')
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
+  end
+
+  it 'sorts books by average rating descending' do
+    visit books_path(sort: 'rating', direction: 'DESC')
+
+    expected_order = [
+      page.body.index('The Fellowship of the Ring'),
+      page.body.index('The Two Towers'),
+      page.body.index('The Return of the King'),
+      page.body.index('The Goliath Stone'),
+      page.body.index('Ringworld'),
+      page.body.index('Inferno')
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
   end
 end
