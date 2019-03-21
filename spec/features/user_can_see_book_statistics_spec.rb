@@ -18,7 +18,7 @@ RSpec.describe 'book index page statistics', type: :feature do
       description: "The banter of the characters...")
     @review_05 = @book_2.reviews.create(user: "Natalia Morton", rating: 4, title: "Settle back and enjoy",
       description: "There are many references...")
-    @review_06 = @book_2.reviews.create(user: "Lee John", rating: 5, title: "Not Niven's best stuff",
+    @review_06 = @book_2.reviews.create(user: "Lydia Mora", rating: 5, title: "Not Niven's best stuff",
       description: "This is a quick read...")
 
     @author_2 = Author.create(name: "Jerry Pournelle")
@@ -94,6 +94,16 @@ RSpec.describe 'book index page statistics', type: :feature do
 
       expect(page).to have_content(@book_5.title)
       expect(page).to have_content("Average Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
+    end
+  end
+
+  it 'displays three most prolific reviewers' do
+    visit books_path
+
+    within '#top_reviewers' do
+      expect(page).to have_content("Lydia Mora: 3 reviews")
+      expect(page).to have_content("Lukas Bentley: 2 reviews")
+      expect(page).to have_content("Veronica Morgan: 2 reviews")
     end
   end
 end
