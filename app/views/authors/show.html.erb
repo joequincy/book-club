@@ -1,0 +1,20 @@
+<h1><%= @author.name %></h1>
+
+<% @author.books.each do |book| %>
+  <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
+    Title:  <%= link_to book.title, book_path(book) %><br />
+
+    <% if book.authors.count >= 2 %>
+      Co-Author: <% book.authors.each do |co_author| %>
+        <% if co_author.name != @author.name %>
+          <%= link_to co_author.name, author_path(co_author) %><br />
+        <% end %>
+      <% end %>
+    <% end %>
+
+    Pages: <%= book.pages %><br />
+    Year Published: <%= book.year_published %><br />
+    Average Rating: <%= book.average_rating %><br />
+    <img src="<%= book.thumbnail %>" /><br  />
+  </div>
+<% end %>

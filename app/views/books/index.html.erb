@@ -1,14 +1,22 @@
-<section>
-  <% @books.each do |book| %>
-    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
+<nav>Sort by:
+  <%= link_to 'Rating (descending)', books_path(sort: 'rating') %>
+  <%= link_to 'Rating (ascending)', books_path(sort: 'rating', direction: 'ASC') %>
+  <%= link_to 'Pages (descending)', books_path(sort: 'pages') %>
+  <%= link_to 'Pages (ascending)', books_path(sort: 'pages', direction: 'ASC') %>
+  <%= link_to 'Reviews (descending)', books_path(sort: 'reviews') %>
+  <%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %>
+</nav>
 
+<section>
+  <% @sorted_books.each do |book| %>
+    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
       <figure>
         <img src="<%= book.thumbnail %>" />
       </figure>
 
       Title:  <%= link_to book.title, book_path(book) %><br />
       Author: <% book.authors.each do |author| %>
-        <%= author.name %>
+        <%= link_to author.name, author_path(author) %>
       <% end %><br />
       Pages: <%= book.pages %><br />
       Year Published: <%= book.year_published %>

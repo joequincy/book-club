@@ -18,8 +18,6 @@ RSpec.describe Book, type: :model do
       description: "The banter of the characters...")
     @review_05 = @book_2.reviews.create(user: "Natalia Morton", rating: 4, title: "Settle back and enjoy",
       description: "There are many references...")
-    @review_06 = @book_2.reviews.create(user: "Lee John", rating: 5, title: "Not Niven's best stuff",
-      description: "This is a quick read...")
 
     @author_2 = Author.create(name: "Jerry Pournelle")
     @book_3 = Book.create(title: "Inferno", pages: 237, year_published: 1976, thumbnail: "https://upload.wikimedia.org/wikipedia/en/8/86/InfernoNovel.jpg")
@@ -119,7 +117,6 @@ RSpec.describe Book, type: :model do
     end
   end
 
-
   describe 'content validations' do
     describe 'when you create a new book' do
       it 'should convert the title to title caps' do
@@ -143,36 +140,64 @@ RSpec.describe Book, type: :model do
 
         expect(actual).to eq(true)
       end
+    end
+  end 
 
-  
   describe 'queries' do
     it 'can return worst three books by average review rating' do
       worst = Book.worst_3
       expect(worst[0].title).to eq("Inferno")
       expect(worst[1].title).to eq("Ringworld")
-      expect(worst[2].title).to eq("The Return of the King")
+      expect(worst[2].title).to eq("The Goliath Stone")
     end
 
     it 'can return best three books by average review rating' do
       best = Book.best_3
       expect(best[0].title).to eq("The Fellowship of the Ring")
-      expect(best[1].title).to eq("The Goliath Stone").or eq("The Two Towers")
-      expect(best[2].title).to eq("The Goliath Stone").or eq("The Two Towers")
-      expect(best[1].title).to_not eq(best[2].title)
+      expect(best[1].title).to eq("The Two Towers")
+      expect(best[2].title).to eq("The Return of the King")
     end
 
     it 'can return all books sorted by average review rating ascending' do
-      ascending_results = Book.by_average_ratings(limit: false)
+      ascending_results = Book.by_average_ratings(dir: 'ASC', limit: false)
 
       expect(ascending_results.first.title).to eq("Inferno")
       expect(ascending_results.last.title).to eq("The Fellowship of the Ring")
     end
 
     it 'can return all books sorted by average review rating descending' do
-      descending_results = Book.by_average_ratings(direction: 'DESC', limit: false)
+      descending_results = Book.by_average_ratings(limit: false)
 
       expect(descending_results.first.title).to eq("The Fellowship of the Ring")
       expect(descending_results.last.title).to eq("Inferno")
+    end
+
+    it 'can be sorted by number of pages ascending' do
+      ascending_results = Book.by_pages(dir: 'ASC')
+
+      expect(ascending_results.first.title).to eq('Inferno')
+      expect(ascending_results.last.title).to eq('Ringworld')
+    end
+
+    it 'can be sorted by number of pages descending' do
+      descending_results = Book.by_pages
+
+      expect(descending_results.first.title).to eq('Ringworld')
+      expect(descending_results.last.title).to eq('Inferno')
+    end
+
+    it 'can be sorted by number of reviews ascending' do
+      ascending_results = Book.by_reviews(dir: 'ASC')
+
+      expect(ascending_results.first.title).to eq('The Goliath Stone')
+      expect(ascending_results.last.title).to eq('The Return of the King')
+    end
+
+    it 'can be sorted by number of reviews descending' do
+      descending_results = Book.by_reviews
+
+      expect(descending_results.first.title).to eq('The Return of the King')
+      expect(descending_results.last.title).to eq('The Goliath Stone')
     end
   end
 end

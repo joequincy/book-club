@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root :to => 'welcomes#index'
 
   resources :books, only: [:index, :show, :new, :create]
+  resources :authors, only: [:show]
 end
