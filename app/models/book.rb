@@ -23,14 +23,14 @@ class Book < ApplicationRecord
     by_average_ratings(direction: 'ASC', limit: 3)
   end
 
-  def self.by_pages(**args)
-    self.order('pages ' + (args[:direction] ||= 'ASC'))
+  def self.by_pages(direction = nil)
+    self.order('pages ' + (direction ||= 'ASC'))
   end
 
-  def self.by_reviews(**args)
+  def self.by_reviews(direction = nil)
     self.left_joins(:reviews)
         .group(:id)
-        .order('COUNT(reviews.id) ' + (args[:direction] ||= 'ASC'))
+        .order('COUNT(reviews.id) ' + (direction ||= 'ASC'))
   end
 
   def average_rating
