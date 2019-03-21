@@ -23,3 +23,9 @@
   <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
   <% end %>
 </div>
+<div id='top_reviewers'>
+  <h6>Top Reviewers</h6>
+  <% @reviews.top_reviewers.each do |reviewer| %>
+  <%= "#{reviewer[0]}: #{reviewer[1]} reviews" %>
+  <% end %>
+</div>

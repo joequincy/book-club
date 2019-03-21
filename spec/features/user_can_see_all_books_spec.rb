@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "user index", type: :feature do
+RSpec.describe "book index", type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
@@ -33,13 +33,26 @@ RSpec.describe "user index", type: :feature do
   describe 'for each book' do
     it 'shows average rating' do
       visit books_path
-        within '#ringworld' do
-          expect(page).to have_content("Average Rating: #{@book_1.average_rating}")
-        end
+      within '#ringworld' do
+        expect(page).to have_content("Average Rating: #{@book_1.average_rating}")
+      end
 
-        within '#the-goliath-stone' do
-          expect(page).to have_content("Average Rating: #{@book_2.average_rating}")
-        end
+      within '#the-goliath-stone' do
+        expect(page).to have_content("Average Rating: #{@book_2.average_rating}")
       end
     end
   end
+
+  describe 'for each book' do
+    it 'shows average rating' do
+      visit books_path
+      within '#ringworld' do
+        expect(page).to have_content("Average Rating: #{@book_1.average_rating}")
+      end
+
+      within '#the-goliath-stone' do
+        expect(page).to have_content("Average Rating: #{@book_2.average_rating}")
+      end
+    end
+  end
+end
