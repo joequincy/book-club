@@ -1,31 +1,40 @@
-<% @books.each do |book| %>
-  <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
-    Title:  <%= link_to book.title, book_path(book) %><br />
-    Author: <% book.authors.each do |author| %>
-      <%= author.name %>
-    <% end %><br />
-    Pages: <%= book.pages %><br />
-    Year Published: <%= book.year_published %>
-    Average Rating: <%= book.average_rating %>
-    <img src="<%= book.thumbnail %>" />
-  </div>
-<% end %>
+<section>
+  <% @books.each do |book| %>
+    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
 
-<div id='worst_books'>
+      <figure>
+        <img src="<%= book.thumbnail %>" />
+      </figure>
+
+      Title:  <%= link_to book.title, book_path(book) %><br />
+      Author: <% book.authors.each do |author| %>
+        <%= author.name %>
+      <% end %><br />
+      Pages: <%= book.pages %><br />
+      Year Published: <%= book.year_published %>
+      Average Rating: <%= book.average_rating %>
+    </div>
+  <% end %>
+</section>
+
+
+<section id='worst_books'>
   <h6>Worst Books</h6>
   <% @books.worst_3.each do |book| %>
   <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
   <% end %>
-</div>
-<div id='best_books'>
+</section>
+
+<section id='best_books'>
   <h6>Best Books</h6>
   <% @books.best_3.each do |book| %>
   <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
   <% end %>
-</div>
-<div id='top_reviewers'>
+</section>
+
+<section id='top_reviewers'>
   <h6>Top Reviewers</h6>
   <% @reviews.top_reviewers.each do |reviewer| %>
   <%= "#{reviewer[0]}: #{reviewer[1]} reviews" %>
   <% end %>
-</div>
+</section>
