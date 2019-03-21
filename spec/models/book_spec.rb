@@ -145,5 +145,33 @@ RSpec.describe Book, type: :model do
       expect(descending_results.first.title).to eq("The Fellowship of the Ring")
       expect(descending_results.last.title).to eq("Inferno")
     end
+
+    it 'can be sorted by number of pages ascending' do
+      ascending_results = Book.by_pages(direction: 'ASC')
+
+      expect(ascending_results.first.title).to eq('Inferno')
+      expect(ascending_results.last.title).to eq('Ringworld')
+    end
+
+    it 'can be sorted by number of pages descending' do
+      descending_results = Book.by_pages(direction: 'DESC')
+
+      expect(descending_results.first.title).to eq('Ringworld')
+      expect(descending_results.last.title).to eq('Inferno')
+    end
+
+    it 'can be sorted by number of reviews ascending' do
+      ascending_results = Book.by_reviews(direction: 'ASC')
+
+      expect(ascending_results.first.title).to eq('The Goliath Stone')
+      expect(ascending_results.last.title).to eq('The Return of the King')
+    end
+
+    it 'can be sorted by number of reviews descending' do
+      descending_results = Book.by_reviews(direction: 'DESC')
+
+      expect(descending_results.first.title).to eq('The Return of the King')
+      expect(descending_results.last.title).to eq('The Goliath Stone')
+    end
   end
 end
