@@ -143,8 +143,10 @@ RSpec.describe Book, type: :model do
 
         expect(actual).to eq(true)
       end
+    end
+  end 
 
-  
+
   describe 'queries' do
     it 'can return worst three books by average review rating' do
       worst = Book.worst_3
