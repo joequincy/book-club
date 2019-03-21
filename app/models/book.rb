@@ -6,6 +6,11 @@ class Book < ApplicationRecord
   validates :pages, presence: true, numericality: { greater_than: 0 }
   validates :year_published, presence: true, numericality: { greater_than: 0 }
 
+  def self.already_exists?(book)
+    book.title = book.title.titleize
+    self.exists?(title: book.title)
+  end 
+  
   def self.by_average_ratings(**args)
     query = self.select('books.*, AVG(reviews.rating) AS avg_rating')
                 .joins(:reviews)
