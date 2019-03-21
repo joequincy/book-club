@@ -140,7 +140,7 @@ RSpec.describe Book, type: :model do
     end
 
     it 'can return all books sorted by average review rating descending' do
-      descending_results = Book.by_average_ratings(direction: 'DESC', limit: false)
+      descending_results = Book.by_average_ratings(dir: 'DESC', limit: false)
 
       expect(descending_results.first.title).to eq("The Fellowship of the Ring")
       expect(descending_results.last.title).to eq("Inferno")
@@ -154,7 +154,7 @@ RSpec.describe Book, type: :model do
     end
 
     it 'can be sorted by number of pages descending' do
-      descending_results = Book.by_pages('DESC')
+      descending_results = Book.by_pages(dir: 'DESC')
 
       expect(descending_results.first.title).to eq('Ringworld')
       expect(descending_results.last.title).to eq('Inferno')
@@ -168,7 +168,7 @@ RSpec.describe Book, type: :model do
     end
 
     it 'can be sorted by number of reviews descending' do
-      descending_results = Book.by_reviews('DESC')
+      descending_results = Book.by_reviews(dir: 'DESC')
 
       expect(descending_results.first.title).to eq('The Return of the King')
       expect(descending_results.last.title).to eq('The Goliath Stone')
