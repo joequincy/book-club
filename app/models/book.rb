@@ -10,27 +10,27 @@ class Book < ApplicationRecord
     query = self.select('books.*, AVG(reviews.rating) AS avg_rating')
                 .joins(:reviews)
                 .group('books.id')
-                .order('avg_rating ' + (args[:direction] ||= 'ASC'))
+                .order('avg_rating ' + (args[:dir] ||= 'ASC'))
     return query if args[:limit] === false
     query.limit(args[:limit] ||= 3)
   end
 
   def self.best_3
-    by_average_ratings(direction: 'DESC', limit: 3)
+    by_average_ratings(dir: 'DESC', limit: 3)
   end
 
   def self.worst_3
-    by_average_ratings(direction: 'ASC', limit: 3)
+    by_average_ratings(dir: 'ASC', limit: 3)
   end
 
-  def self.by_pages(direction = nil)
-    self.order('pages ' + (direction ||= 'ASC'))
+  def self.by_pages(*nils, **args)
+    self.order('pages ' + (args[:dir] ||= 'ASC'))
   end
 
-  def self.by_reviews(direction = nil)
+  def self.by_reviews(*nils, **args)
     self.left_joins(:reviews)
         .group(:id)
-        .order('COUNT(reviews.id) ' + (direction ||= 'ASC'))
+        .order('COUNT(reviews.id) ' + (args[:dir] ||= 'ASC'))
   end
 
   def average_rating
