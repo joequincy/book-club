@@ -117,6 +117,32 @@ RSpec.describe Book, type: :model do
     end
   end
 
+  describe 'content validations' do
+    describe 'when you create a new book' do
+      it 'should convert the title to title caps' do
+        book = Book.create(title: "return of the king", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
+        Book.already_exists?(book)
+
+        expect(book.title).to eq("Return Of The King")
+      end
+    end
+
+    describe 'when you try to create a book that already exists' do
+      it 'will validate that the book already exists' do
+        book_1 = Book.new(title: "Return Of The King", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
+        actual = Book.already_exists?(book_1)
+
+        expect(actual).to eq(false)
+
+        book_1.save
+        book_2 = Book.new(title: "Return Of The King", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
+        actual = Book.already_exists?(book_2)
+
+        expect(actual).to eq(true)
+      end
+    end
+  end 
+
   describe 'queries' do
     it 'can return worst three books by average review rating' do
       worst = Book.worst_3

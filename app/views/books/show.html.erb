@@ -1,15 +1,15 @@
-Title:  <%= @book.title %><br />
-Author: <% @book.authors.each do |author| %>
-  <%= link_to author.name, author_path(author) %>
-<% end %><br />
-Pages: <%= @book.pages %><br />
-Year Published: <%= @book.year_published %>
-<img src="<%= @book.thumbnail %>" />
+  Title:  <%= @book.title %><br />
+  Author: <% @book.authors.each do |author| %>
+    <%= link_to author.name, author_path(author) %>
+  <% end %><br />
+  Pages: <%= @book.pages %><br />
+  Year Published: <%= @book.year_published %><br />
+  <img src="<%= @book.thumbnail %>" />
 
-<h1>Reviews:</h1>
-<% @book.reviews.each do |review| %>
-  Title: <%= review.title %><br />
-  User: <%= review.user %><br />
-  Rating: <%= review.rating %><br />
-  Description: <%= review.description %><br />
-<% end %>
+  <h1>Reviews:</h1>
+  <% @book.reviews.each do |review| %>
+    Title: <%= review.title %><br />
+    User: <%= review.user %><br />
+    Rating: <%= review.rating %><br />
+    Description: <%= review.description %><br />
+  <% end %>
