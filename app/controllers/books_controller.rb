@@ -13,14 +13,23 @@ class BooksController < ApplicationController
   end
 
   def create
-    # authors = book_params[:authors].split(',').map do |author|
-    author = Author.create(name: book_params[:authors])
-    author.books.create(title: book_params[:title],
-                    pages: book_params[:pages],
-                    year_published: book_params[:year_published],
-                    thumbnail: book_params[:thumbnail])
+    author_names = params[:authors].split(',')
+    book = Book.new(book_params)
+    if Book.already_exists?(book)
+      redirect_to new_book_path
+    else
+    book.save
+    assign_book_to_author(author_names, book)
+    redirect_to book_path(book.id)
+    end
+  end
 
-    redirect_to book_path(author.books.first)
+  def assign_book_to_author(author_names, book)
+    author_names.each do |name|
+      name.strip
+      author = Author.find_or_create_by(name: name)
+      author.books << book
+    end
   end
 
   private
