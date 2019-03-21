@@ -27,8 +27,7 @@ class BooksController < ApplicationController
 
   def assign_book_to_author(author_names, book)
     author_names.each do |name|
-      name.strip
-      author = Author.find_or_create_by(name: name)
+      author = Author.find_or_create_by(name: name.strip)
       author.books << book
     end
   end
