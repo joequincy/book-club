@@ -25,7 +25,7 @@
 </div>
 <div id='top_reviewers'>
   <h6>Top Reviewers</h6>
-  <% @books.top_reviewers.each do |reviewer| %>
+  <% @reviews.top_reviewers.each do |reviewer| %>
   <%= "#{reviewer[0]}: #{reviewer[1]} reviews" %>
   <% end %>
 </div>
