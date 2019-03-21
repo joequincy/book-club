@@ -1,4 +1,4 @@
-<% @books.each do |book| %>
+<% @sorted_books.each do |book| %>
   <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
     Title:  <%= link_to book.title, book_path(book) %><br />
     Author: <% book.authors.each do |author| %>

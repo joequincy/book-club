@@ -1,14 +1,22 @@
 class BooksController < ApplicationController
 
   def index
-    @books = if params[:sort]
+    @sorted_books = if params[:sort]
+      direction = params[:direction]
       case params[:sort]
-      when 'reviews' then Book.by_reviews(params[:direction])
-      when 'pages' then Book.by_pages(params[:direction])
+      when 'reviews'
+        Book.by_reviews(dir: direction)
+      when 'pages'
+        Book.by_pages(dir: direction)
+      when 'rating'
+        Book.by_average_ratings(dir: direction, limit: false)
+      else
+        Book.all
       end
     else
       Book.all
     end
+    @books = Book.all
     @reviews = Review.all
   end
 
