@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Book, type: :model do
+RSpec.describe 'book index page statistics', type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
@@ -18,7 +18,7 @@ RSpec.describe Book, type: :model do
       description: "The banter of the characters...")
     @review_05 = @book_2.reviews.create(user: "Natalia Morton", rating: 4, title: "Settle back and enjoy",
       description: "There are many references...")
-    @review_06 = @book_2.reviews.create(user: "Lee John", rating: 5, title: "Not Niven's best stuff",
+    @review_06 = @book_2.reviews.create(user: "Lydia Mora", rating: 5, title: "Not Niven's best stuff",
       description: "This is a quick read...")
 
     @author_2 = Author.create(name: "Jerry Pournelle")
@@ -67,112 +67,43 @@ RSpec.describe Book, type: :model do
       description: "Even if you love the...")
   end
 
-  describe 'relationships' do
-    it { should have_many(:author_books) }
-    it { should have_many(:authors).through(:author_books) }
-    it { should have_many(:reviews) }
-  end
+  it 'displays three worst-rated books' do
+    visit books_path
 
-  describe 'validations' do
-    describe 'Required Field(s)' do
-      it 'should be invalid if missing a title' do
-        book = Book.create(pages: 48, year_published: 1953, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
+    within '#worst_books' do
+      expect(page).to have_content(@book_3.title)
+      expect(page).to have_content("Average Rating: #{((3 + 1 + 1)/3.to_f).round(2)}")
 
-      it 'should be invalid if missing page numbers' do
-        book = Book.create(title:"Title", year_published: 1953, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
+      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content("Average Rating: #{((5 + 4 + 4)/3.to_f).round(2)}")
 
-      it 'should be invalid if page numbers is not a number' do
-        book = Book.create(title: "Title", pages: "forty-eight", year_published: 1953, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
-
-      it 'should be invalid if page numbers is less than 1' do
-        book = Book.create(title: "Title", pages: 0, year_published: 1953, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-
-        book = Book.create(title: "Title", pages: -29, year_published: 1953, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
-
-
-      it 'should be invalid if missing publication year' do
-        book = Book.create(title: "Title", pages: 100, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
-
-      it 'should be invalid if publication year is not a number' do
-        book = Book.create(title: "Title", pages: 100, year_published: "nineteen eighty six", thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
-
-      it 'should be invalid if publication year is less than 1' do
-        book = Book.create(title: "Title", pages: 100, year_published: 0, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-
-        book = Book.create(title: "Title", pages: 100, year_published: -1923, thumbnail: 'http://image.jpg')
-        expect(book).to_not be_valid
-      end
+      expect(page).to have_content(@book_6.title)
+      expect(page).to have_content("Average Rating: #{((5 + 5 + 5 + 4 + 4)/5.to_f).round(2)}")
     end
   end
 
+  it 'displays three best-rated books' do
+    visit books_path
 
-  describe 'content validations' do
-    describe 'when you create a new book' do
-      it 'should convert the title to title caps' do
-        book = Book.create(title: "return of the king", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
-        Book.already_exists?(book)
+    within '#best_books' do
+      expect(page).to have_content(@book_4.title)
+      expect(page).to have_content("Average Rating: #{5.to_f.round(2)}")
 
-        expect(book.title).to eq("Return Of The King")
-      end
+      expect(page).to have_content(@book_2.title)
+      expect(page).to have_content("Average Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
+
+      expect(page).to have_content(@book_5.title)
+      expect(page).to have_content("Average Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
     end
+  end
 
-    describe 'when you try to create a book that already exists' do
-      it 'will validate that the book already exists' do
-        book_1 = Book.new(title: "Return Of The King", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
-        actual = Book.already_exists?(book_1)
+  it 'displays three most prolific reviewers' do
+    visit books_path
 
-        expect(actual).to eq(false)
-
-        book_1.save
-        book_2 = Book.new(title: "Return Of The King", pages: 100, year_published: 10, thumbnail: 'http://image.jpg')
-        actual = Book.already_exists?(book_2)
-
-        expect(actual).to eq(true)
-      end
-
-  
-  describe 'queries' do
-    it 'can return worst three books by average review rating' do
-      worst = Book.worst_3
-      expect(worst[0].title).to eq("Inferno")
-      expect(worst[1].title).to eq("Ringworld")
-      expect(worst[2].title).to eq("The Return of the King")
-    end
-
-    it 'can return best three books by average review rating' do
-      best = Book.best_3
-      expect(best[0].title).to eq("The Fellowship of the Ring")
-      expect(best[1].title).to eq("The Goliath Stone").or eq("The Two Towers")
-      expect(best[2].title).to eq("The Goliath Stone").or eq("The Two Towers")
-      expect(best[1].title).to_not eq(best[2].title)
-    end
-
-    it 'can return all books sorted by average review rating ascending' do
-      ascending_results = Book.by_average_ratings(limit: false)
-
-      expect(ascending_results.first.title).to eq("Inferno")
-      expect(ascending_results.last.title).to eq("The Fellowship of the Ring")
-    end
-
-    it 'can return all books sorted by average review rating descending' do
-      descending_results = Book.by_average_ratings(direction: 'DESC', limit: false)
-
-      expect(descending_results.first.title).to eq("The Fellowship of the Ring")
-      expect(descending_results.last.title).to eq("Inferno")
+    within '#top_reviewers' do
+      expect(page).to have_content("Lydia Mora: 3 reviews")
+      expect(page).to have_content("Lukas Bentley: 2 reviews")
+      expect(page).to have_content("Veronica Morgan: 2 reviews")
     end
   end
 end
