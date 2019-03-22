@@ -68,10 +68,12 @@ a:hover {
   flex-shrink: 1;
   line-height: 1.5em;
   font-size: 20px;
+  min-width: 200px;
 }
 
 .book-content img {
   width: 150px;
+  height: auto;
 }
 
 .book-content h2 a {
@@ -82,16 +84,16 @@ a:hover {
   line-height: 1.2em;
 }
 
-.left {
-  width: 10%;
-}
-
 .center {
-  width: 15%;
+  width: 17%;
 }
 
 .right {
   width: 55%;
+}
+
+.align-right {
+  float: right;
 }
 
 .stats {
