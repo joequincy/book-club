@@ -5,6 +5,7 @@
   <li><%= link_to 'Pages (ascending)', books_path(sort: 'pages', direction: 'ASC') %></li>
   <li><%= link_to 'Reviews (descending)', books_path(sort: 'reviews') %></li>
   <li><%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %></li>
+  <li class="align-right"><%= link_to '+ Add a New Book', new_book_path %></li>
 </nav>
 
 <section class="stats">
@@ -35,7 +36,7 @@
 <section id='all-books'>
   <% @books.each do |book| %>
     <div class="book" id='<%= book.title.downcase.gsub(" ", "-") %>'>
-      <section class="book-content left">
+      <section class="book-content">
         <img src="<%= book.thumbnail %>" class="book-small-thumb"/>
       </section>
 
@@ -47,6 +48,7 @@
         <p>Pages: <%= book.pages %></p>
         <p>Year Published: <%= book.year_published %></p>
         <p>Average Rating: <%= book.average_rating.round(2) %></p>
+        <p>Total Reviews: <%= book.reviews.count %></p>
       </section>
 
       <section class="book-content right">
