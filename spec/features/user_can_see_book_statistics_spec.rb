@@ -101,9 +101,9 @@ RSpec.describe 'book index page statistics', type: :feature do
     visit books_path
 
     within '#top_reviewers' do
-      expect(page).to have_content("Lydia Mora: 3 reviews")
-      expect(page).to have_content("Lukas Bentley: 2 reviews")
-      expect(page).to have_content("Veronica Morgan: 2 reviews")
+      expect(page).to have_content("Lydia Mora: 3 total reviews")
+      expect(page).to have_content("Lukas Bentley: 2 total reviews")
+      expect(page).to have_content("Veronica Morgan: 2 total reviews")
     end
   end
 end
