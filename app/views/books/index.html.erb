@@ -7,8 +7,8 @@
   <%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %>
 </nav>
 
-<section>
-  <% @sorted_books.each do |book| %>
+<section id='all-books'>
+  <% @books.each do |book| %>
     <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
       <figure>
         <img src="<%= book.thumbnail %>" />
@@ -28,21 +28,21 @@
 
 <section id='worst_books'>
   <h6>Worst Books</h6>
-  <% @books.worst_3.each do |book| %>
+  <% @worst_3.each do |book| %>
   <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
   <% end %>
 </section>
 
 <section id='best_books'>
   <h6>Best Books</h6>
-  <% @books.best_3.each do |book| %>
+  <% @best_3.each do |book| %>
   <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
   <% end %>
 </section>
 
 <section id='top_reviewers'>
   <h6>Top Reviewers</h6>
-  <% @reviews.top_reviewers.each do |reviewer| %>
+  <% @top_reviewers.each do |reviewer| %>
   <%= "#{reviewer[0]}: #{reviewer[1]} reviews" %>
   <% end %>
 </section>
