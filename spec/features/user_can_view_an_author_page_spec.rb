@@ -43,7 +43,6 @@ RSpec.describe 'author show page', type: :feature do
 
   it 'will not display the current author under co-authors' do
     visit author_path(@author_1)
-    save_and_open_page
 
     within '#inferno' do
       expect(page).to have_content("Co-Author: #{@author_2.name}")
