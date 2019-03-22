@@ -6,7 +6,7 @@ RSpec.describe "navigation", type: :feature do
       it 'links to home' do
         visit books_path
 
-        within 'nav' do
+        within 'nav.main' do
           click_on("Home")
           expect(current_path).to eq('/')
         end
@@ -16,7 +16,7 @@ RSpec.describe "navigation", type: :feature do
         book = Book.create(title: "Title", pages: 123, year_published: 1793)
         visit books_path
 
-        within 'nav' do
+        within 'nav.main' do
           click_on("Browse All Books")
           expect(current_path).to eq(books_path)
         end
