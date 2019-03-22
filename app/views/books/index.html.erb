@@ -9,10 +9,10 @@
 
 <section id='all-books'>
   <% @books.each do |book| %>
-    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
-      <figure>
-        <img src="<%= book.thumbnail %>" />
-      </figure>
+    <div class="book" id='<%= book.title.downcase.gsub(" ", "-") %>'>
+      <section class="book-content left">
+        <img src="<%= book.thumbnail %>" class="book-small-thumb"/>
+      </section>
 
       <section class="book-content center">
         <h2><%= link_to book.title, book_path(book) %></h2>
@@ -36,7 +36,7 @@
 <section class="stats">
   <section id='worst_books' class="stats-content">
     <h2>Worst Books</h2>
-    <% @books.worst_3.each do |book| %>
+    <% @worst_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
     Average Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
@@ -44,7 +44,7 @@
 
   <section id='best_books' class="stats-content">
     <h2>Best Books</h2>
-    <% @books.best_3.each do |book| %>
+    <% @best_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
     Average Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
@@ -52,7 +52,7 @@
 
   <section id='top_reviewers' class="stats-content">
     <h2>Top Reviewers</h2>
-    <% @reviews.top_reviewers.each do |reviewer| %>
+    <% @top_reviewers.each do |reviewer| %>
     <%= "#{reviewer[0]}: #{reviewer[1]} total reviews" %><br />
     <% end %>
   </section>
