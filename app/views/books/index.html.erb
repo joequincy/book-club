@@ -7,12 +7,12 @@
   <li><%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %></li>
 </nav>
 
-<section id="all-books">
-  <% @sorted_books.each do |book| %>
-    <div class="book" id='<%= book.title.downcase.gsub(" ", "-") %>'>
-      <section class="book-content left">
-        <img src="<%= book.thumbnail %>" class="book-small-thumb" />
-      </section>
+<section id='all-books'>
+  <% @books.each do |book| %>
+    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
+      <figure>
+        <img src="<%= book.thumbnail %>" />
+      </figure>
 
       <section class="book-content center">
         <h2><%= link_to book.title, book_path(book) %></h2>
