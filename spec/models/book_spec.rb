@@ -211,5 +211,11 @@ RSpec.describe Book, type: :model do
       fresh_book = @author_1.books.create(title: 'Nothing', pages: 321, year_published: 1999, thumbnail: 'http://google.com/logo.png')
       expect(fresh_book.average_rating).to eq(0.0)
     end
+
+    it 'selects the books top review' do
+      expect(@book_1.top_reviews(1).first).to eq(@review_03)
+      expect(@book_2.top_reviews(1).first).to eq(@review_04)
+      expect(@book_3.top_reviews(1).first).to eq(@review_07)
+    end
   end
 end
