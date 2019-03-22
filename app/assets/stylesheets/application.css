@@ -1,7 +1,117 @@
-nav li {
-  display: inline-block;
+body {
+  background-color: #F2F2F2;
+  font-family: Lato;
 }
 
-figure img {
+p {
+  display: block;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav a:hover {
+  color: #990000;
+  text-decoration: none;
+}
+
+a {
+  color: #990000;
+  text-decoration:none;
+}
+
+a:hover {
+  color: #787878;
+}
+
+
+.book-small-thumb {
   width: 200px;
+  height: 100%;
+  align: left;
+}
+
+.main {
+  padding: 20px;
+  background-color: #222222;
+  color: white;
+}
+
+.main a {
+  color: white;
+}
+
+.subnav {
+  margin: 20px;
+}
+
+.book {
+  border: 1px solid #ebebeb;
+  margin: 20px;
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.book-content {
+  margin: 30px;
+  display: block;
+  justify-content: left;
+  flex-wrap: wrap;
+  flex-grow: 3;
+  flex-shrink: 1;
+  line-height: 1.5em;
+  font-size: 20px;
+}
+
+.book-content img {
+  width: 150px;
+}
+
+.book-content h2 a {
+  font-family: Lato;
+  font-size: 35px;
+  display: block;
+  text-decoration: none;
+  line-height: 1.2em;
+}
+
+.left {
+  width: 10%;
+}
+
+.center {
+  width: 15%;
+}
+
+.right {
+  width: 55%;
+}
+
+.stats {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 20px;
+  border: 1px solid #BABABA;
+}
+
+
+.stats-content {
+  background-color: #CCCCCC;
+  padding: 20px;
+  width: 27%;
+  min-width: 200px;
+  display: block;
+  justify-content: left;
+  flex-wrap: wrap;
+  flex-grow: 3;
+  flex-shrink: 1;
+  line-height: 1.5em;
+  font-size: 20px;
 }
