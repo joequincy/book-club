@@ -1,48 +1,59 @@
-<nav>Sort by:
-  <%= link_to 'Rating (descending)', books_path(sort: 'rating') %>
-  <%= link_to 'Rating (ascending)', books_path(sort: 'rating', direction: 'ASC') %>
-  <%= link_to 'Pages (descending)', books_path(sort: 'pages') %>
-  <%= link_to 'Pages (ascending)', books_path(sort: 'pages', direction: 'ASC') %>
-  <%= link_to 'Reviews (descending)', books_path(sort: 'reviews') %>
-  <%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %>
+<nav class="subnav">Sort by:
+  <li><%= link_to 'Rating (descending)', books_path(sort: 'rating') %></li>
+  <li><%= link_to 'Rating (ascending)', books_path(sort: 'rating', direction: 'ASC') %></li>
+  <li><%= link_to 'Pages (descending)', books_path(sort: 'pages') %></li>
+  <li><%= link_to 'Pages (ascending)', books_path(sort: 'pages', direction: 'ASC') %></li>
+  <li><%= link_to 'Reviews (descending)', books_path(sort: 'reviews') %></li>
+  <li><%= link_to 'Reviews (ascending)', books_path(sort: 'reviews', direction: 'ASC') %></li>
 </nav>
 
-<section>
+<section id="all-books">
   <% @sorted_books.each do |book| %>
-    <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
-      <figure>
-        <img src="<%= book.thumbnail %>" />
-      </figure>
+    <div class="book" id='<%= book.title.downcase.gsub(" ", "-") %>'>
+      <section class="book-content left">
+        <img src="<%= book.thumbnail %>" class="book-small-thumb" />
+      </section>
 
-      Title:  <%= link_to book.title, book_path(book) %><br />
-      Author: <% book.authors.each do |author| %>
-        <%= link_to author.name, author_path(author) %>
-      <% end %><br />
-      Pages: <%= book.pages %><br />
-      Year Published: <%= book.year_published %>
-      Average Rating: <%= book.average_rating %>
+      <section class="book-content center">
+        <h2><%= link_to book.title, book_path(book) %></h2>
+        <p>Author: <% book.authors.each do |author| %>
+          <%= link_to author.name, author_path(author) %>
+        <% end %></p>
+        <p>Pages: <%= book.pages %></p>
+        <p>Year Published: <%= book.year_published %></p>
+        <p>Average Rating: <%= book.average_rating %></p>
+      </section>
+
+      <section class="book-content right">
+        <h2>Top Review</h2>
+        <h3>Review Title</h3>
+        <p class="review">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </section>
     </div>
   <% end %>
 </section>
 
+<section class="stats">
+  <section id='worst_books' class="stats-content">
+    <h2>Worst Books</h2>
+    <% @books.worst_3.each do |book| %>
+    <%= link_to book.title, book_path(book) %> |
+    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
+    <% end %>
+  </section>
 
-<section id='worst_books'>
-  <h6>Worst Books</h6>
-  <% @books.worst_3.each do |book| %>
-  <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
-  <% end %>
-</section>
+  <section id='best_books' class="stats-content">
+    <h2>Best Books</h2>
+    <% @books.best_3.each do |book| %>
+    <%= link_to book.title, book_path(book) %> |
+    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
+    <% end %>
+  </section>
 
-<section id='best_books'>
-  <h6>Best Books</h6>
-  <% @books.best_3.each do |book| %>
-  <%= "#{book.title} - Average Rating: #{book.average_rating.to_f.round(2)}" %><br>
-  <% end %>
-</section>
-
-<section id='top_reviewers'>
-  <h6>Top Reviewers</h6>
-  <% @reviews.top_reviewers.each do |reviewer| %>
-  <%= "#{reviewer[0]}: #{reviewer[1]} reviews" %>
-  <% end %>
+  <section id='top_reviewers' class="stats-content">
+    <h2>Top Reviewers</h2>
+    <% @reviews.top_reviewers.each do |reviewer| %>
+    <%= "#{reviewer[0]}: #{reviewer[1]} total reviews" %><br />
+    <% end %>
+  </section>
 </section>
