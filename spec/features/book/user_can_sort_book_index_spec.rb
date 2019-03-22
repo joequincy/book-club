@@ -68,13 +68,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by pages ascending' do
     visit books_path(sort: 'pages', direction: 'ASC')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('Inferno'),
-      page.body.index('The Goliath Stone'),
-      page.body.index('The Two Towers'),
-      page.body.index('The Return of the King'),
-      page.body.index('The Fellowship of the Ring'),
-      page.body.index('Ringworld')
+      book_list.index('Inferno'),
+      book_list.index('The Goliath Stone'),
+      book_list.index('The Two Towers'),
+      book_list.index('The Return of the King'),
+      book_list.index('The Fellowship of the Ring'),
+      book_list.index('Ringworld')
     ]
 
     expect(expected_order).to eq(expected_order.sort)
@@ -83,13 +84,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by pages descending' do
     visit books_path(sort: 'pages')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('Ringworld'),
-      page.body.index('The Fellowship of the Ring'),
-      page.body.index('The Return of the King'),
-      page.body.index('The Two Towers'),
-      page.body.index('The Goliath Stone'),
-      page.body.index('Inferno')
+      book_list.index('Ringworld'),
+      book_list.index('The Fellowship of the Ring'),
+      book_list.index('The Return of the King'),
+      book_list.index('The Two Towers'),
+      book_list.index('The Goliath Stone'),
+      book_list.index('Inferno')
     ]
 
     expect(expected_order).to eq(expected_order.sort)
@@ -98,13 +100,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by review count ascending' do
     visit books_path(sort: 'reviews', direction: 'ASC')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('The Goliath Stone'),
-      page.body.index('Ringworld'),
-      page.body.index('Inferno'),
-      page.body.index('The Two Towers'),
-      page.body.index('The Fellowship of the Ring'),
-      page.body.index('The Return of the King')
+      book_list.index('The Goliath Stone'),
+      book_list.index('Ringworld'),
+      book_list.index('Inferno'),
+      book_list.index('The Two Towers'),
+      book_list.index('The Fellowship of the Ring'),
+      book_list.index('The Return of the King')
     ]
 
     expect(expected_order.first).to eq(expected_order.sort.first)
@@ -114,13 +117,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by review count descending' do
     visit books_path(sort: 'reviews')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('The Return of the King'),
-      page.body.index('The Fellowship of the Ring'),
-      page.body.index('The Two Towers'),
-      page.body.index('Inferno'),
-      page.body.index('Ringworld'),
-      page.body.index('The Goliath Stone')
+      book_list.index('The Return of the King'),
+      book_list.index('The Fellowship of the Ring'),
+      book_list.index('The Two Towers'),
+      book_list.index('Inferno'),
+      book_list.index('Ringworld'),
+      book_list.index('The Goliath Stone')
     ]
 
     expect(expected_order.first).to eq(expected_order.sort.first)
@@ -130,13 +134,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by average rating ascending' do
     visit books_path(sort: 'rating', direction: 'ASC')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('Inferno'),
-      page.body.index('Ringworld'),
-      page.body.index('The Goliath Stone'),
-      page.body.index('The Return of the King'),
-      page.body.index('The Two Towers'),
-      page.body.index('The Fellowship of the Ring')
+      book_list.index('Inferno'),
+      book_list.index('Ringworld'),
+      book_list.index('The Goliath Stone'),
+      book_list.index('The Return of the King'),
+      book_list.index('The Two Towers'),
+      book_list.index('The Fellowship of the Ring')
     ]
 
     expect(expected_order).to eq(expected_order.sort)
@@ -145,13 +150,14 @@ RSpec.describe 'book index page sorting', type: :feature do
   it 'sorts books by average rating descending' do
     visit books_path(sort: 'rating')
 
+    book_list = page.find('#all-books').text
     expected_order = [
-      page.body.index('The Fellowship of the Ring'),
-      page.body.index('The Two Towers'),
-      page.body.index('The Return of the King'),
-      page.body.index('The Goliath Stone'),
-      page.body.index('Ringworld'),
-      page.body.index('Inferno')
+      book_list.index('The Fellowship of the Ring'),
+      book_list.index('The Two Towers'),
+      book_list.index('The Return of the King'),
+      book_list.index('The Goliath Stone'),
+      book_list.index('Ringworld'),
+      book_list.index('Inferno')
     ]
 
     expect(expected_order).to eq(expected_order.sort)
