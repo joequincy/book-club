@@ -7,6 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'csv'
+
+Book.destroy_all
+Author.destroy_all
+Review.destroy_all
+
 authors = {}
 books = {}
 
