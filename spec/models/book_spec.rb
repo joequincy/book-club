@@ -141,7 +141,7 @@ RSpec.describe Book, type: :model do
         expect(actual).to eq(true)
       end
     end
-  end 
+  end
 
   describe 'queries' do
     it 'can return worst three books by average review rating' do
@@ -198,6 +198,18 @@ RSpec.describe Book, type: :model do
 
       expect(descending_results.first.title).to eq('The Return of the King')
       expect(descending_results.last.title).to eq('The Goliath Stone')
+    end
+  end
+
+  describe 'instance methods' do
+    it 'gets the average rating of a book' do
+      expect(@book_2.average_rating.round(2)).to eq(4.5)
+      expect(@book_5.average_rating.round(2)).to eq(4.67)
+    end
+
+    it 'books with no reviews have an average rating of 0' do
+      fresh_book = @author_1.books.create(title: 'Nothing', pages: 321, year_published: 1999, thumbnail: 'http://google.com/logo.png')
+      expect(fresh_book.average_rating).to eq(0.0)
     end
   end
 end

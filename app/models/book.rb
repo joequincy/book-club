@@ -9,8 +9,8 @@ class Book < ApplicationRecord
   def self.already_exists?(book)
     book.title = book.title.titleize
     self.exists?(title: book.title)
-  end 
-  
+  end
+
   def self.by_average_ratings(**args)
     query = self.select('books.*, AVG(reviews.rating) AS avg_rating')
                 .joins(:reviews)
@@ -39,6 +39,6 @@ class Book < ApplicationRecord
   end
 
   def average_rating
-    self.reviews.average(:rating)
+    self.reviews.average(:rating) || 0
   end
 end

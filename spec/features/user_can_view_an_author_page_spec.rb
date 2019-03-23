@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'author show page', type: :feature do
+RSpec.describe 'author: show page', type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @author_2 = Author.create(name: "Jerry Pournelle")
