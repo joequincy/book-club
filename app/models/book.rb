@@ -41,4 +41,14 @@ class Book < ApplicationRecord
   def average_rating
     self.reviews.average(:rating) || 0
   end
+
+  def top_reviews(limit = 'ALL')
+    reviews.order(rating: :desc, created_at: :asc)
+           .limit(limit)
+  end
+
+  def bottom_reviews(limit = 'ALL')
+    reviews.order(rating: :asc, created_at: :desc)
+           .limit(limit)
+  end
 end
