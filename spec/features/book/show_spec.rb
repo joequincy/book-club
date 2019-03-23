@@ -28,19 +28,21 @@ RSpec.describe 'book: show page', type: :feature do
 
     visit book_path(book_1)
 
-    expect(page).to have_content(review_1.title)
-    expect(page).to have_content("Rating: #{review_1.rating}")
-    expect(page).to have_content(review_1.user)
-    expect(page).to have_content(review_1.description)
+    within '#all-reviews' do
+      expect(page).to have_content(review_1.title)
+      expect(page).to have_content("Rating: #{review_1.rating}")
+      expect(page).to have_content(review_1.user)
+      expect(page).to have_content(review_1.description)
 
-    expect(page).to have_content(review_2.title)
-    expect(page).to have_content("Rating: #{review_2.rating}")
-    expect(page).to have_content(review_2.user)
-    expect(page).to have_content(review_2.description)
+      expect(page).to have_content(review_2.title)
+      expect(page).to have_content("Rating: #{review_2.rating}")
+      expect(page).to have_content(review_2.user)
+      expect(page).to have_content(review_2.description)
 
-    expect(page).to have_content(review_3.title)
-    expect(page).to have_content("Rating: #{review_3.rating}")
-    expect(page).to have_content(review_3.user)
-    expect(page).to have_content(review_3.description)
+      expect(page).to have_content(review_3.title)
+      expect(page).to have_content("Rating: #{review_3.rating}")
+      expect(page).to have_content(review_3.user)
+      expect(page).to have_content(review_3.description)
+    end
   end
 end

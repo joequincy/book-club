@@ -26,3 +26,13 @@
     Rating: <%= review.rating %><br />
   <% end %>
 </section>
+
+<section id='all-reviews'>
+  <h1>All Reviews:</h1>
+  <% @book.reviews.each do |review| %>
+    Title: <%= review.title %><br />
+    User: <%= review.user %><br />
+    Rating: <%= review.rating %><br />
+    Description: <%= review.description %><br />
+  <% end %>
+</section>
