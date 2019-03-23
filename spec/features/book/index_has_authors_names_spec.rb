@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "book index", type: :feature do
-  it "user can see all books" do
+RSpec.describe 'book: index has author names', type: :feature do
+  it 'user can see author name' do
     author_1 = Author.create(name: "Larry Niven")
     book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
     book_2 = Book.create(title: "The Goliath Stone", pages: 320, year_published: 2013, thumbnail: "https://images-na.ssl-images-amazon.com/images/I/51l%2BUTphB1L.jpg")
@@ -13,7 +13,7 @@ RSpec.describe "book index", type: :feature do
     expect(page).to have_content(author_1.name)
   end
 
-  it "user can see all authors if book has multiple" do
+  it 'user can see all authors if book has multiple' do
     author_1 = Author.create(name: "Larry Niven")
     author_2 = Author.create(name: "Jerry Pournelle")
     book_3 = Book.create(title: "Inferno", pages: 237, year_published: 1976,thumbnail: "https://upload.wikimedia.org/wikipedia/en/8/86/InfernoNovel.jpg")

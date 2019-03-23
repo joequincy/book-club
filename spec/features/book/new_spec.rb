@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "as a user", type: :feature do
+RSpec.describe 'book: new page', type: :feature do
   describe "when I visits books/new" do
     it "can add a new book through a form" do
 

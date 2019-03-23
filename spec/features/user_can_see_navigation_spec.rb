@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "navigation", type: :feature do
+RSpec.describe 'general: navigation', type: :feature do
   describe 'when a user visits a webpage' do
     describe 'they can see a navigation bar'
       it 'links to home' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'book index page sorting', type: :feature do
+RSpec.describe 'book: index page sorting', type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
