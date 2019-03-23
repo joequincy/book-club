@@ -173,4 +173,20 @@ RSpec.describe 'book: index page sorting', type: :feature do
     expect(page).to have_link('Reviews (descending)', href: books_path(sort: 'reviews'))
     expect(page).to have_link('Reviews (ascending)', href: books_path(sort: 'reviews', direction: 'ASC'))
   end
+
+  it 'uses database order if invalid sort parameter is passed' do
+    visit books_path(sort: 'nonsense')
+
+    book_list = page.find('#all-books').text
+    expected_order = [
+      book_list.index(@book_1.title),
+      book_list.index(@book_2.title),
+      book_list.index(@book_3.title),
+      book_list.index(@book_4.title),
+      book_list.index(@book_5.title),
+      book_list.index(@book_6.title)
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
+  end
 end
