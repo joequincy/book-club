@@ -11,6 +11,11 @@ h2 {
   font-size: 25px;
 }
 
+h3 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
 nav li {
   display: inline-block;
   margin-right: 20px;
@@ -68,10 +73,12 @@ a:hover {
   flex-shrink: 1;
   line-height: 1.5em;
   font-size: 20px;
+  min-width: 200px;
 }
 
 .book-content img {
   width: 150px;
+  height: auto;
 }
 
 .book-content h2 a {
@@ -82,28 +89,28 @@ a:hover {
   line-height: 1.2em;
 }
 
-.left {
-  width: 10%;
-}
-
 .center {
-  width: 15%;
+  width: 17%;
 }
 
 .right {
   width: 55%;
 }
 
+.align-right {
+  float: right;
+}
+
 .stats {
   display: flex;
   flex-flow: row wrap;
   margin: 20px;
-  border: 1px solid #BABABA;
+  border: 1px solid #D1D1D1;
 }
 
 
 .stats-content {
-  background-color: #CCCCCC;
+  background-color: #D9D9D9;
   padding: 20px;
   width: 27%;
   min-width: 200px;
@@ -113,5 +120,9 @@ a:hover {
   flex-grow: 3;
   flex-shrink: 1;
   line-height: 1.5em;
-  font-size: 20px;
+  font-size: 17px;
+}
+
+.review {
+  font-size: 17px;
 }

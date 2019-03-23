@@ -105,4 +105,34 @@ RSpec.describe Review, type: :model do
     end
   end
 
+  describe 'content validations' do
+    describe 'when you create a new review' do
+      it 'should convert the username to title caps' do
+        review = Review.create(user: "abby robinson", title: "Great Book", rating: 5, description: "Description")
+        book = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
+        Review.already_exists?(review, book)
+
+        expect(review.user).to eq("Abby Robinson")
+      end
+    end
+
+    describe 'when you try to review a book you have already reviewed' do
+      it 'will validate that the user already exists in that books reviews' do
+        book = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
+        review_1 = Review.create(user: "Abby Robinson", title: "Great Book", rating: 5, description: "Description")
+
+        actual = Review.already_exists?(review_1, book)
+
+        expect(actual).to eq(false)
+
+        review_1.save
+        book.reviews << review_1
+        
+        review_2 = Review.create(user: "Abby Robinson", title: "Great Book", rating: 5, description: "Description")
+        actual = Review.already_exists?(review_2, book)
+
+        expect(actual).to eq(true)
+      end
+    end
+  end
 end
