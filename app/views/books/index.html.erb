@@ -46,7 +46,7 @@
         <% end %></p>
         <p>Pages: <%= book.pages %></p>
         <p>Year Published: <%= book.year_published %></p>
-        <p>Average Rating: <%= book.average_rating %></p>
+        <p>Average Rating: <%= book.average_rating.round(2) %></p>
       </section>
 
       <section class="book-content right">
