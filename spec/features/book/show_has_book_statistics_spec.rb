@@ -70,7 +70,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
   it 'displays top three reviews by rating' do
     visit book_path(@book_6)
 
-    review_list = page.find('#top_reviews').text
+    review_list = page.find('#top-reviews').text
     expected_order = [
       review_list.index('Lee John'),
       review_list.index('Lukas Bentley'),
@@ -78,7 +78,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
     ]
     expect(expected_order).to eq(expected_order.sort)
 
-    within '#top_reviews' do
+    within '#top-reviews' do
       expect(page).to have_content(@review_17.title)
       expect(page).to have_content("Rating: #{@review_17.rating}")
 
@@ -93,7 +93,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
   it 'displays bottom three reviews by rating' do
     visit book_path(@book_6)
 
-    review_list = page.find('#bottom_reviews').text
+    review_list = page.find('#bottom-reviews').text
     expected_order = [
       review_list.index('Lydia Mora'),
       review_list.index('Jax Lewis'),
@@ -101,7 +101,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
     ]
     expect(expected_order).to eq(expected_order.sort)
 
-    within '#bottom_reviews' do
+    within '#bottom-reviews' do
       expect(page).to have_content(@review_17.title)
       expect(page).to have_content("Rating: #{@review_17.rating}")
 
@@ -120,7 +120,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
       book_6_reviews = [@review_17, @review_18, @review_19, @review_20, @review_21]
       avg_rating_6 = book_6_reviews.sum do |review|
         review.rating
-      end / book_6_reviews.count
+      end / book_6_reviews.count.to_f
       expect(page).to have_content("Average Rating: #{avg_rating_6.round(2)}")
     end
 
@@ -130,7 +130,7 @@ RSpec.describe 'book: show page has statistics', type: :feature do
       book_3_reviews = [@review_07, @review_08, @review_09]
       avg_rating_3 = book_3_reviews.sum do |review|
         review.rating
-      end / book_3_reviews.count
+      end / book_3_reviews.count.to_f
       expect(page).to have_content("Average Rating: #{avg_rating_3.round(2)}")
     end
   end
