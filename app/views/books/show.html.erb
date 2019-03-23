@@ -1,10 +1,13 @@
+<section id='book-details'>
   Title:  <%= @book.title %><br />
   Author: <% @book.authors.each do |author| %>
     <%= link_to author.name, author_path(author) %>
   <% end %><br />
   Pages: <%= @book.pages %><br />
   Year Published: <%= @book.year_published %><br />
-  <img src="<%= @book.thumbnail %>" />
+  <img src="<%= @book.thumbnail %>" /><br />
+  Average Rating: <%= @book.average_rating.round(2) %>
+</section>
 
   <h1>Reviews:</h1>
   <% @book.reviews.each do |review| %>
