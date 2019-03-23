@@ -87,6 +87,10 @@ RSpec.describe 'book: show page has statistics', type: :feature do
 
       expect(page).to have_content(@review_19.title)
       expect(page).to have_content("Rating: #{@review_19.rating}")
+
+      expect(page).to_not have_content(@review_17.description)
+      expect(page).to_not have_content(@review_18.description)
+      expect(page).to_not have_content(@review_19.description)
     end
   end
 
@@ -110,6 +114,10 @@ RSpec.describe 'book: show page has statistics', type: :feature do
 
       expect(page).to have_content(@review_21.title)
       expect(page).to have_content("Rating: #{@review_21.rating}")
+
+      expect(page).to_not have_content(@review_17.description)
+      expect(page).to_not have_content(@review_20.description)
+      expect(page).to_not have_content(@review_21.description)
     end
   end
 
