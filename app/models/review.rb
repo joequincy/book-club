@@ -10,4 +10,10 @@ class Review < ApplicationRecord
                     .count
     reviewers.sort_by{|k,v|-v}.first(3)
   end
+
+  def self.already_exists?(review, book)
+    review.user = review.user.titleize
+    book.reviews.exists?(user: review.user)
+  end
+
 end
