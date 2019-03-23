@@ -42,7 +42,7 @@
 
       <section class="book-content center">
         <h2><%= link_to book.title, book_path(book) %></h2>
-        <p>Author: <% book.authors.each do |author| %>
+        <p>Author<%= book.authors.count > 1 ? 's' : '' %>: <% book.authors.each do |author| %>
           <%= link_to author.name, author_path(author) %>
         <% end %></p>
         <p>Pages: <%= book.pages %></p>

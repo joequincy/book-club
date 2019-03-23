@@ -1,22 +1,56 @@
 <nav class="subnav">
   <li class="align-right"><%= link_to '+ Add a New Review', new_book_review_path(@book) %></li>
 </nav>
+<section id='book-details'>
+  <div class='book' id='<%= @book.title.downcase.gsub(" ", "-") %>'>
+    <section class="book-content left">
+      <img src="<%= @book.thumbnail %>" class="book-small-thumb"/>
+    </section>
 
-<section>
-  Title:  <%= @book.title %><br />
-  Author: <% @book.authors.each do |author| %>
-    <%= link_to author.name, author_path(author) %>
-  <% end %><br />
-  Pages: <%= @book.pages %><br />
-  Year Published: <%= @book.year_published %><br />
-  <img src="<%= @book.thumbnail %>" />
+    <section class='book-content center'>
+      <h2><%= link_to @book.title, book_path(@book) %></h2>
+      <p>Author<%= @book.authors.count > 1 ? 's' : '' %>: <% @book.authors.each do |author| %>
+        <%= link_to author.name, author_path(author) %>
+      <% end %></p>
+      <p>Pages: <%= @book.pages %></p>
+      <p>Year Published: <%= @book.year_published %></p>
+      <p>Average Rating: <%= @book.average_rating.round(2) %></p>
+    </section>
 
-  <h1>Reviews:</h1>
+    <section class='book-content right'>
+      <section id='top-reviews'>
+        <h1>Highest Reviews:</h1>
+        <% @top_reviews.each do |review| %>
+        <ul>
+          <li>User: <%= review.user %></li>
+          <li>Rating: <%= review.rating %></li>
+          <li>Title: <%= review.title %></li>
+        </ul>
+        <% end %>
+      </section>
+
+      <section id='bottom-reviews'>
+        <h1>Lowest Reviews:</h1>
+        <% @bottom_reviews.each do |review| %>
+        <ul>
+          <li>User: <%= review.user %></li>
+          <li>Rating: <%= review.rating %></li>
+          <li>Title: <%= review.title %></li>
+        </ul>
+        <% end %>
+      </section>
+    </section>
+  </div>
+</section>
+
+<section id='all-reviews'>
+  <h1>All Reviews:</h1>
   <% @book.reviews.each do |review| %>
   <blockquote id="review-<%= review.id %>">
     Title: <%= review.title %><br />
     User: <%= review.user %><br />
     Rating: <%= review.rating %><br />
     Description: <%= review.description %><br />
+  </blockquote>
   <% end %>
-</blockquote>
+</section>

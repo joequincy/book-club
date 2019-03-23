@@ -24,7 +24,6 @@ RSpec.describe 'book: show page', type: :feature do
   end
 
   it 'displays all reviews for this book' do
-
     visit book_path(@book_1)
 
     expect(page).to have_content(@review_1.title)
