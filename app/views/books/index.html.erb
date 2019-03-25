@@ -28,8 +28,8 @@
   <section id='top_reviewers' class="stats-content">
     <h2>Top Reviewers</h2>
     <% @top_reviewers.each do |reviewer| %>
-    <%= link_to reviewer[0], user_path(reviewer[0]) %>
-    <%= ": #{reviewer[1]} total reviews" %><br />
+    <%= link_to reviewer.user, user_path(reviewer.user) %>
+    <%= ": #{reviewer.review_count} total reviews" %><br />
     <% end %>
   </section>
 </section>
