@@ -84,4 +84,21 @@ RSpec.describe 'user: show page', type: :feature do
     expect(page).to have_css(".review-timestamp:not(:empty)")
     expect(page).to have_css("img[src*='#{@review_06.book.thumbnail}']")
   end
+
+  describe 'for each review' do
+    it 'displays the book title as a link' do
+      visit user_path('Lydia Mora')
+      click_link(@review_06.book.title)
+      expect(page).to have_current_path(book_path(@book_2))
+
+      visit user_path('Lydia Mora')
+      click_link(@review_07.book.title)
+      expect(page).to have_current_path(book_path(@book_3))
+
+      visit user_path('Lydia Mora')
+      click_link(@review_20.book.title)
+      expect(page).to have_current_path(book_path(@book_6))
+    end
+  end
+
 end
