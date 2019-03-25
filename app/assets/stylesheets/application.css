@@ -22,6 +22,43 @@ h3 {
   display: inline;
 }
 
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+}
+
+blockquote {
+  margin: 20px;
+}
+
+input {
+  width: 50%;
+  height: 25px;
+  padding: 25px 25px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+input[type=submit] {
+  background-color: #990000;
+  border: none;
+  color: white;
+  padding: 16px 22px;
+  text-decoration: none;
+  margin: 15px 0px;
+  cursor: pointer;
+  height: 60px;
+}
+
+form {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    font-size:20px;
+}
+
 nav li {
   display: inline-block;
   margin-right: 20px;
@@ -43,8 +80,13 @@ a:hover {
 
 
 .book-small-thumb {
-  width: 200px;
-  height: 100%;
+  width: 150px;
+  height: auto;
+}
+
+.book-large-thumb {
+  width: 300px;
+  height: auto;
   align: left;
 }
 
@@ -60,6 +102,10 @@ a:hover {
 
 .subnav {
   margin: 20px;
+}
+
+.subnav a:hover {
+  color: #787878;
 }
 
 .book {
@@ -82,10 +128,6 @@ a:hover {
   min-width: 200px;
 }
 
-.book-content img {
-  width: 150px;
-  height: auto;
-}
 
 .book-content h2 a {
   font-family: Lato;
@@ -96,11 +138,19 @@ a:hover {
 }
 
 .center {
-  width: 17%;
+  width: 30%;
 }
 
 .right {
-  width: 55%;
+  width: 30%;
+}
+
+.center-review {
+  width: 20%;
+}
+
+.right-review {
+  width: 45%;
 }
 
 .align-right {
@@ -131,4 +181,16 @@ a:hover {
 
 .review {
   font-size: 17px;
+}
+
+.emphasis {
+  font-size: 60px;
+}
+
+.solo {
+  display: inline-block;
+}
+
+.form {
+  align-self: center;
 }
