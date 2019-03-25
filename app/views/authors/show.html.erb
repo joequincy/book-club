@@ -28,8 +28,8 @@
       <% if book.reviews.count == 0 %>
         There are no reviews for this book yet. <%= link_to 'Create one now!', new_book_review_path(book) %>
       <% else %>
-        <h3><%= book.top_reviews(1).first.title %></h3> | Rating: <%= book.top_reviews(1).first.rating %>
-        <p class="review"><%= book.top_reviews(1).first.description %> -- <%= book.top_reviews(1).first.user %></p>
+        <h3><%= book.top_reviews.first.title %></h3> | Rating: <%= book.top_reviews(1).first.rating %>
+        <p class="review"><%= book.top_reviews.first.description %> -- <%= book.top_reviews(1).first.user %></p>
       <% end %>
     </section>
   </div>
