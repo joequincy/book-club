@@ -34,6 +34,8 @@
           <h3><%= review.title %></h3> | Rating: <%= review.rating %> | <%= link_to review.user, user_path(review.user) %>
         <% end %>
       </section>
+      <br />
+      <li class="align-right solo"><%= link_to'- Delete This Book', @book, method: :delete %></li>
     </section>
   </div>
 </section>

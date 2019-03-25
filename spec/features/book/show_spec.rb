@@ -106,5 +106,15 @@ RSpec.describe 'book: show page', type: :feature do
 
       expect(page).to_not have_content("Not as good the second time")
     end
+
+    it "has a link to delete a book" do
+      visit book_path(@book_1)
+
+      click_link("- Delete This Book")
+
+      expect(current_path).to eq(books_path)
+      expect(page).to_not have_content(@book_1.title)
+    end
+
   end
 end
