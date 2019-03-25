@@ -16,4 +16,8 @@ class Review < ApplicationRecord
     book.reviews.exists?(user: review.user)
   end
 
+  def self.user_by_date(user: nil, dir:)
+    where(user: user)
+   .order('created_at ' + dir)
+  end
 end
