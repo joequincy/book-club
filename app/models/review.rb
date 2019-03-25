@@ -6,9 +6,10 @@ class Review < ApplicationRecord
   validates :rating, presence: true, numericality: { greater_than: 0, less_than: 6 }
 
   def self.top_reviewers
-    reviewers = self.group('reviews.user')
-                    .count
-    reviewers.sort_by{|k,v|-v}.first(3)
+    reviewers = self.select('reviews.user, COUNT(reviews.user) as review_count')
+                    .group('reviews.user')
+                    .order('review_count DESC')
+                    .limit(3)
   end
 
   def self.already_exists?(review, book)
