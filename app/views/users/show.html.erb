@@ -1,0 +1,24 @@
+<main>
+<% @reviews.each do |review| %>
+<section class='review-container'>
+  <figure class='book-small-thumb'>
+    <img src='<%= review.book.thumbnail %>'>
+  </figure>
+  <section class='review-content'>
+    <h2><%= review.book.title %></h2>
+    <p>
+      <span class='review-title'>
+        <%= review.title %>
+      </span> :
+      <span class='review-rating'>
+        Rated <%= review.rating %>/5
+      </span> at
+      <span class='review-timestamp'>
+        <%= review.created_at %>
+      </span>
+    </p>
+    <p><%= review.description %></p>
+  </section>
+</section>
+<% end %>
+</main>

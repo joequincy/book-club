@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'book: index page sorting', type: :feature do
+RSpec.describe 'user: show page', type: :feature do
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
     @book_1 = Book.create(title: "Ringworld", pages: 430, year_published: 1970, thumbnail: "https://d2svrcwl6l7hz1.cloudfront.net/content/B00CNTUVLO/resources/0?mime=image/*")
@@ -18,6 +18,8 @@ RSpec.describe 'book: index page sorting', type: :feature do
       description: "The banter of the characters...")
     @review_05 = @book_2.reviews.create(user: "Natalia Morton", rating: 4, title: "Settle back and enjoy",
       description: "There are many references...")
+    @review_06 = @book_2.reviews.create(user: "Lydia Mora", rating: 5, title: "Not Niven's best stuff",
+      description: "This is a quick read...")
 
     @author_2 = Author.create(name: "Jerry Pournelle")
     @book_3 = Book.create(title: "Inferno", pages: 237, year_published: 1976, thumbnail: "https://upload.wikimedia.org/wikipedia/en/8/86/InfernoNovel.jpg")
@@ -54,139 +56,32 @@ RSpec.describe 'book: index page sorting', type: :feature do
     @book_6 = Book.create(title: "The Return of the King", pages: 416, year_published: 1955, thumbnail: "https://upload.wikimedia.org/wikipedia/en/1/11/The_Return_of_the_King_cover.gif")
     AuthorBook.create(author_id: @author_3.id, book_id: @book_6.id)
     @review_17 = @book_6.reviews.create(user: "Milly Dunlap", rating: 5, title: "Better than the movies",
-      description: "The conclusion to my...")
+      description: "The conclusion to my...", created_at: 3.hours.ago)
     @review_18 = @book_6.reviews.create(user: "Lee John", rating: 5, title: "Tolkein is a master",
-      description: "I love going back and...")
+      description: "I love going back and...", created_at: 2.days.ago)
     @review_19 = @book_6.reviews.create(user: "Lukas Bentley", rating: 5, title: "Perfect",
-      description: "A perfect final volume...")
+      description: "A perfect final volume...", created_at: 18.hours.ago)
     @review_20 = @book_6.reviews.create(user: "Lydia Mora", rating: 4, title: "Lovely",
-      description: "The Return of the King...")
+      description: "The Return of the King...", created_at: 1.hour.ago)
     @review_21 = @book_6.reviews.create(user: "Jax Lewis", rating: 4, title: "Better than the movie, but both are awesome",
-      description: "Even if you love the...")
+      description: "Even if you love the...", created_at: 2.weeks.ago)
   end
 
-  it 'sorts books by pages ascending' do
-    visit books_path(sort: 'pages', direction: 'ASC')
+  it 'displays all reviews by user' do
+    visit user_path('Lydia Mora')
 
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('Inferno'),
-      book_list.index('The Goliath Stone'),
-      book_list.index('The Two Towers'),
-      book_list.index('The Return of the King'),
-      book_list.index('The Fellowship of the Ring'),
-      book_list.index('Ringworld')
-    ]
-
-    expect(expected_order).to eq(expected_order.sort)
+    expect(page).to have_content(@review_06.title)
+    expect(page).to have_content(@review_07.title)
+    expect(page).to have_content(@review_20.title)
   end
 
-  it 'sorts books by pages descending' do
-    visit books_path(sort: 'pages')
+  it 'displays all review content' do
+    visit user_path('Lydia Mora')
 
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('Ringworld'),
-      book_list.index('The Fellowship of the Ring'),
-      book_list.index('The Return of the King'),
-      book_list.index('The Two Towers'),
-      book_list.index('The Goliath Stone'),
-      book_list.index('Inferno')
-    ]
-
-    expect(expected_order).to eq(expected_order.sort)
-  end
-
-  it 'sorts books by review count ascending' do
-    visit books_path(sort: 'reviews', direction: 'ASC')
-
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('The Goliath Stone'),
-      book_list.index('Ringworld'),
-      book_list.index('Inferno'),
-      book_list.index('The Two Towers'),
-      book_list.index('The Fellowship of the Ring'),
-      book_list.index('The Return of the King')
-    ]
-
-    expect(expected_order.first).to eq(expected_order.sort.first)
-    expect(expected_order.last).to eq(expected_order.sort.last)
-  end
-
-  it 'sorts books by review count descending' do
-    visit books_path(sort: 'reviews')
-
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('The Return of the King'),
-      book_list.index('The Fellowship of the Ring'),
-      book_list.index('The Two Towers'),
-      book_list.index('Inferno'),
-      book_list.index('Ringworld'),
-      book_list.index('The Goliath Stone')
-    ]
-
-    expect(expected_order.first).to eq(expected_order.sort.first)
-    expect(expected_order.last).to eq(expected_order.sort.last)
-  end
-
-  it 'sorts books by average rating ascending' do
-    visit books_path(sort: 'rating', direction: 'ASC')
-
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('Inferno'),
-      book_list.index('Ringworld'),
-      book_list.index('The Goliath Stone'),
-      book_list.index('The Return of the King'),
-      book_list.index('The Two Towers'),
-      book_list.index('The Fellowship of the Ring')
-    ]
-
-    expect(expected_order).to eq(expected_order.sort)
-  end
-
-  it 'sorts books by average rating descending' do
-    visit books_path(sort: 'rating')
-
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index('The Fellowship of the Ring'),
-      book_list.index('The Two Towers'),
-      book_list.index('The Return of the King'),
-      book_list.index('The Goliath Stone'),
-      book_list.index('Ringworld'),
-      book_list.index('Inferno')
-    ]
-
-    expect(expected_order).to eq(expected_order.sort)
-  end
-
-  it 'has links to sort by all options' do
-    visit books_path
-
-    expect(page).to have_link('Rating (descending)', href: books_path(sort: 'rating'))
-    expect(page).to have_link('Rating (ascending)', href: books_path(sort: 'rating', direction: 'ASC'))
-    expect(page).to have_link('Pages (descending)', href: books_path(sort: 'pages'))
-    expect(page).to have_link('Pages (ascending)', href: books_path(sort: 'pages', direction: 'ASC'))
-    expect(page).to have_link('Reviews (descending)', href: books_path(sort: 'reviews'))
-    expect(page).to have_link('Reviews (ascending)', href: books_path(sort: 'reviews', direction: 'ASC'))
-  end
-
-  it 'uses database order if invalid sort parameter is passed' do
-    visit books_path(sort: 'nonsense')
-
-    book_list = page.find('#all-books').text
-    expected_order = [
-      book_list.index(@book_1.title),
-      book_list.index(@book_2.title),
-      book_list.index(@book_3.title),
-      book_list.index(@book_4.title),
-      book_list.index(@book_5.title),
-      book_list.index(@book_6.title)
-    ]
-
-    expect(expected_order).to eq(expected_order.sort)
+    expect(page).to have_content(@review_06.description)
+    expect(page).to have_content("Rated #{@review_06.rating}/5")
+    expect(page).to have_content(@review_06.book.title)
+    expect(page).to have_content(@review_06.created_at)
+    expect(page).to have_css("img[src*='#{@review_06.book.thumbnail}']")
   end
 end

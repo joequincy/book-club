@@ -108,7 +108,7 @@ a:hover {
   color: #787878;
 }
 
-.book {
+.book, .review-container {
   border: 1px solid #ebebeb;
   margin: 20px;
   background-color: white;
@@ -128,6 +128,10 @@ a:hover {
   min-width: 200px;
 }
 
+.book-content img, .review-container img {
+  width: 150px;
+  height: auto;
+}
 
 .book-content h2 a {
   font-family: Lato;
@@ -181,6 +185,18 @@ a:hover {
 
 .review {
   font-size: 17px;
+}
+
+.review-container {
+  padding: 15px 0;
+}
+
+.review-container figure {
+  text-align: center;
+}
+
+.review-content {
+  flex-basis: calc(100% - 200px)
 }
 
 .emphasis {
