@@ -56,7 +56,7 @@ a:hover {
   margin: 20px;
 }
 
-.book {
+.book, .review-container {
   border: 1px solid #ebebeb;
   margin: 20px;
   background-color: white;
@@ -76,7 +76,7 @@ a:hover {
   min-width: 200px;
 }
 
-.book-content img {
+.book-content img, .review-container img {
   width: 150px;
   height: auto;
 }
@@ -125,4 +125,16 @@ a:hover {
 
 .review {
   font-size: 17px;
+}
+
+.review-container {
+  padding: 15px 0;
+}
+
+.review-container figure {
+  text-align: center;
+}
+
+.review-content {
+  flex-basis: calc(100% - 200px)
 }
