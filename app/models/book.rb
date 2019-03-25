@@ -13,9 +13,9 @@ class Book < ApplicationRecord
 
   def self.by_average_ratings(**args)
     query = self.select('books.*, AVG(reviews.rating) AS avg_rating')
-                .joins(:reviews)
+                .left_joins(:reviews)
                 .group('books.id')
-                .order('avg_rating ' + (args[:dir] ||= 'DESC'))
+                .order('avg_rating ' + (args[:dir] ||= 'DESC') + ' NULLS LAST')
     return query if args[:limit] === false
     query.limit(args[:limit] ||= 3)
   end
