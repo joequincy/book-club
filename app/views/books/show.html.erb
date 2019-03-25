@@ -1,56 +1,54 @@
-<nav class="subnav">
-  <li class="align-right"><%= link_to '+ Add a New Review', new_book_review_path(@book) %></li>
-</nav>
+
+<h1><%= @book.title %></h1>
 <section id='book-details'>
   <div class='book' id='<%= @book.title.downcase.gsub(" ", "-") %>'>
-    <section class="book-content left">
-      <img src="<%= @book.thumbnail %>" class="book-small-thumb"/>
+    <section class="book-content">
+      <img src="<%= @book.thumbnail %>" class="book-large-thumb"/>
     </section>
 
-    <section class='book-content center'>
-      <h2><%= link_to @book.title, book_path(@book) %></h2>
+    <section class='book-content center-review'>
       <p>Author<%= @book.authors.count > 1 ? 's' : '' %>: <% @book.authors.each do |author| %>
         <%= link_to author.name, author_path(author) %>
       <% end %></p>
       <p>Pages: <%= @book.pages %></p>
-      <p>Year Published: <%= @book.year_published %></p>
-      <p>Average Rating: <%= @book.average_rating.round(2) %></p>
+      <p>Year Published: <%= @book.year_published %></p><br  />
+      <p>Average Rating:<br /><br />
+        <span class="emphasis"><%= @book.average_rating.round(2) %></span></p>
+      <br /><br />
     </section>
 
-    <section class='book-content right'>
+    <section class='book-content right-review'>
       <section id='top-reviews'>
-        <h1>Highest Reviews:</h1>
+        <h2>Best Reviews:</h2>
         <% @top_reviews.each do |review| %>
         <ul>
-          <li>User: <%= link_to review.user, user_path(review.user) %></li>
-          <li>Rating: <%= review.rating %></li>
-          <li>Title: <%= review.title %></li>
-        </ul>
+          <h3><%= review.title %></h3> | Rating: <%= review.rating %> | <%= link_to review.user, user_path(review.user) %>
         <% end %>
+        <br /> <br />
       </section>
 
       <section id='bottom-reviews'>
-        <h1>Lowest Reviews:</h1>
+        <h2>Worst Reviews:</h2>
         <% @bottom_reviews.each do |review| %>
         <ul>
-          <li>User: <%= link_to review.user, user_path(review.user) %></li>
-          <li>Rating: <%= review.rating %></li>
-          <li>Title: <%= review.title %></li>
-        </ul>
+          <h3><%= review.title %></h3> | Rating: <%= review.rating %> | <%= link_to review.user, user_path(review.user) %>
         <% end %>
       </section>
     </section>
   </div>
 </section>
 
-<section id='all-reviews'>
-  <h1>All Reviews:</h1>
-  <% @book.reviews.each do |review| %>
-  <blockquote id="review-<%= review.id %>">
-    Title: <%= review.title %><br />
-    User: <%= link_to review.user, user_path(review.user) %><br />
-    Rating: <%= review.rating %><br />
-    Description: <%= review.description %><br />
-  </blockquote>
-  <% end %>
+<section class="book">
+  <section id='all-reviews' class='book-content'>
+    <li class="align-right solo"><%= link_to '+ Add a New Review', new_book_review_path(@book) %></li>
+
+    <h1>All Reviews:</h1>
+    <% @book.reviews.each do |review| %>
+    <blockquote id="review-<%= review.id %>">
+      <h4><%= link_to review.user, user_path(review.user) %></h4>
+      <h3><%= review.title %></h3> | Rating: <%= review.rating %><br />
+      <p class="review"><%= review.description %></p>
+    </blockquote>
+    <% end %>
+  </section>
 </section>

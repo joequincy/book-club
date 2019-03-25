@@ -1,17 +1,20 @@
-<%= form_for Book.new do |f| %>
-  <p><%= f.label :title %><br />
-  <%= f.text_field :title %><br />
+<h1>Add a New Book</h1>
+<section>
+  <%= form_for Book.new do |f| %>
+    <p><%= f.label :title %><br />
+    <%= f.text_field :title %><br />
 
-  <%= label_tag :authors %><br />
-  <%= text_field_tag :authors %><br />
+    <%= label_tag :authors %><br />
+    <%= text_field_tag :authors %><br />
 
-  <%= f.label :pages %><br />
-  <%= f.number_field :pages %><br />
+    <%= f.label :pages %><br />
+    <%= f.number_field :pages %><br />
 
-  <%= f.label :year_published %><br />
-  <%= f.number_field :year_published %><br />
+    <%= f.label :year_published %><br />
+    <%= f.number_field :year_published %><br />
 
-  <%= f.label :thumbnail %><br />
-  <%= f.text_field :thumbnail %><br /></p>
-  <p><%= f.submit %></p>
-<% end %>
+    <%= f.label :thumbnail %><br />
+    <%= f.text_field :thumbnail %><br /></p>
+    <p><%= f.submit %></p>
+  <% end %>
+</section>

@@ -1,20 +1,36 @@
 <h1><%= @author.name %></h1>
 
 <% @author.books.each do |book| %>
-  <div id='<%= book.title.downcase.gsub(" ", "-") %>'>
-    Title:  <%= link_to book.title, book_path(book) %><br />
+  <div class="book" id='<%= book.title.downcase.gsub(" ", "-") %>'>
+    <section class="book-content">
+      <img src="<%= book.thumbnail %>" class="book-small-thumb"/>
+    </section>
 
-    <% if book.authors.count >= 2 %>
-      Co-Author: <% book.authors.each do |co_author| %>
-        <% if co_author.name != @author.name %>
-          <%= link_to co_author.name, author_path(co_author) %><br />
+    <section class="book-content center">
+      <h2><%= link_to book.title, book_path(book) %></h2>
+
+      <% if book.authors.count >= 2 %>
+        Co-Author: <% book.authors.each do |co_author| %>
+          <% if co_author.name != @author.name %>
+            <%= link_to co_author.name, author_path(co_author) %><br />
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
 
-    Pages: <%= book.pages %><br />
-    Year Published: <%= book.year_published %><br />
-    Average Rating: <%= book.average_rating %><br />
-    <img src="<%= book.thumbnail %>" /><br  />
+      Pages: <%= book.pages %><br />
+      Year Published: <%= book.year_published %><br />
+      Average Rating: <%= book.average_rating.round(2) %><br />
+    </section>
+
+    <section class="book-content right">
+      <h2>Top Review</h2>
+
+      <% if book.reviews.count == 0 %>
+        There are no reviews for this book yet. <%= link_to 'Create one now!', new_book_review_path(book) %>
+      <% else %>
+        <h3><%= book.top_reviews.first.title %></h3> | Rating: <%= book.top_reviews(1).first.rating %>
+        <p class="review"><%= book.top_reviews.first.description %> -- <%= book.top_reviews(1).first.user %></p>
+      <% end %>
+    </section>
   </div>
 <% end %>

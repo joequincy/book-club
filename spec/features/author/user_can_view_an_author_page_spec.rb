@@ -11,6 +11,8 @@ RSpec.describe 'author: show page', type: :feature do
     @author_1.books << @book_2
     @author_1.books << @book_3
     @author_2.books << @book_3
+    @review_1 = @book_1.reviews.create(user: "Debbie", title: "Hated It", rating: 1, description: "Boo.")
+    @review_2 = @book_1.reviews.create(user: "Joe", title: "Loved It", rating: 5, description: "Exciting!")
   end
 
   it 'displays single author page' do
@@ -47,6 +49,22 @@ RSpec.describe 'author: show page', type: :feature do
     within '#inferno' do
       expect(page).to have_content("Co-Author: #{@author_2.name}")
       expect(page).to_not have_content(@author_1.name)
+    end
+  end
+
+  it 'will show the top review' do
+    visit author_path(@author_1)
+
+    within '#ringworld' do
+      expect(page).to have_content(@review_2.title)
+      expect(page).to have_content(@review_2.description)
+      expect(page).to have_content("Rating: #{@review_2.rating}")
+      expect(page).to have_content(@review_2.user)
+
+      expect(page).to_not have_content(@review_1.title)
+      expect(page).to_not have_content(@review_1.description)
+      expect(page).to_not have_content("Rating: #{@review_1.rating}")
+      expect(page).to_not have_content(@review_1.user)
     end
   end
 end

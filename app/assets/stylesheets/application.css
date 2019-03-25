@@ -7,6 +7,11 @@ p {
   display: block;
 }
 
+h1 {
+  font-size: 40px;
+  margin: 20px;
+}
+
 h2 {
   font-size: 25px;
 }
@@ -14,6 +19,44 @@ h2 {
 h3 {
   font-size: 19px;
   font-weight: 700;
+  display: inline;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+}
+
+blockquote {
+  margin: 20px;
+}
+
+input {
+  width: 50%;
+  height: 25px;
+  padding: 25px 25px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+input[type=submit] {
+  background-color: #990000;
+  border: none;
+  color: white;
+  padding: 16px 22px;
+  text-decoration: none;
+  margin: 15px 0px;
+  cursor: pointer;
+  height: 60px;
+}
+
+form {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    font-size:20px;
 }
 
 nav li {
@@ -37,8 +80,13 @@ a:hover {
 
 
 .book-small-thumb {
-  width: 200px;
-  height: 100%;
+  width: 150px;
+  height: auto;
+}
+
+.book-large-thumb {
+  width: 300px;
+  height: auto;
   align: left;
 }
 
@@ -54,6 +102,10 @@ a:hover {
 
 .subnav {
   margin: 20px;
+}
+
+.subnav a:hover {
+  color: #787878;
 }
 
 .book, .review-container {
@@ -90,11 +142,19 @@ a:hover {
 }
 
 .center {
-  width: 17%;
+  width: 30%;
 }
 
 .right {
-  width: 55%;
+  width: 30%;
+}
+
+.center-review {
+  width: 20%;
+}
+
+.right-review {
+  width: 45%;
 }
 
 .align-right {
@@ -137,4 +197,16 @@ a:hover {
 
 .review-content {
   flex-basis: calc(100% - 200px)
+}
+
+.emphasis {
+  font-size: 60px;
+}
+
+.solo {
+  display: inline-block;
+}
+
+.form {
+  align-self: center;
 }
