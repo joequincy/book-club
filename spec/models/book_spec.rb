@@ -162,14 +162,14 @@ RSpec.describe Book, type: :model do
       ascending_results = Book.by_average_ratings(dir: 'ASC', limit: false)
 
       expect(ascending_results.first.title).to eq("Inferno")
-      expect(ascending_results.last.title).to eq("The Fellowship of the Ring")
+      expect(ascending_results.to_a.last.title).to eq("The Fellowship of the Ring")
     end
 
     it 'can return all books sorted by average review rating descending' do
       descending_results = Book.by_average_ratings(limit: false)
 
       expect(descending_results.first.title).to eq("The Fellowship of the Ring")
-      expect(descending_results.last.title).to eq("Inferno")
+      expect(descending_results.to_a.last.title).to eq("Inferno")
     end
 
     it 'can be sorted by number of pages ascending' do
