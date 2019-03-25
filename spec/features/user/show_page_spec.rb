@@ -62,7 +62,7 @@ RSpec.describe 'user: show page', type: :feature do
     @review_19 = @book_6.reviews.create(user: "Lukas Bentley", rating: 5, title: "Perfect",
       description: "A perfect final volume...", created_at: 18.hours.ago)
     @review_20 = @book_6.reviews.create(user: "Lydia Mora", rating: 4, title: "Lovely",
-      description: "The Return of the King...", created_at: 1.hour.ago)
+      description: "The Return of the King...", created_at: 70.minutes.ago)
     @review_21 = @book_6.reviews.create(user: "Jax Lewis", rating: 4, title: "Better than the movie, but both are awesome",
       description: "Even if you love the...", created_at: 2.weeks.ago)
   end
@@ -79,9 +79,9 @@ RSpec.describe 'user: show page', type: :feature do
     visit user_path('Lydia Mora')
 
     expect(page).to have_content(@review_06.description)
-    expect(page).to have_content("Rated #{@review_06.rating}/5")
+    expect(page).to have_content("Rating: #{@review_06.rating} / 5")
     expect(page).to have_content(@review_06.book.title)
-    expect(page).to have_content(@review_06.created_at)
+    expect(page).to have_css(".review-timestamp:not(:empty)")
     expect(page).to have_css("img[src*='#{@review_06.book.thumbnail}']")
   end
 end

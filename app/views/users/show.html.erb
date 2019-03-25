@@ -5,16 +5,16 @@
     <img src='<%= review.book.thumbnail %>'>
   </figure>
   <section class='review-content'>
-    <h2><%= review.book.title %></h2>
+    <h2><%= link_to review.book.title, review.book %></h2>
     <p>
       <span class='review-title'>
         <%= review.title %>
-      </span> :
+      </span> |
       <span class='review-rating'>
-        Rated <%= review.rating %>/5
-      </span> at
+        Rating: <%= review.rating %> / 5
+      </span><br />
       <span class='review-timestamp'>
-        <%= review.created_at %>
+        <%= format_date(review.created_at) %>
       </span>
     </p>
     <p><%= review.description %></p>

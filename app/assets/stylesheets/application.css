@@ -193,10 +193,28 @@ a:hover {
 
 .review-container figure {
   text-align: center;
+  width: 200px;
 }
 
 .review-content {
-  flex-basis: calc(100% - 200px)
+  flex-basis: calc(100% - 200px);
+  padding-right: 15px;
+  box-sizing: border-box;
+  line-height: 1.4em;
+}
+
+.review-content p:first-of-type {
+  margin: 15px 0;
+}
+
+.review-content span {
+  display: inline-block;
+}
+
+.review-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 15px;
 }
 
 .emphasis {
