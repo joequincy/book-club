@@ -22,7 +22,7 @@
         <h1>Highest Reviews:</h1>
         <% @top_reviews.each do |review| %>
         <ul>
-          <li>User: <%= review.user %></li>
+          <li>User: <%= link_to review.user, user_path(review.user) %></li>
           <li>Rating: <%= review.rating %></li>
           <li>Title: <%= review.title %></li>
         </ul>
@@ -33,7 +33,7 @@
         <h1>Lowest Reviews:</h1>
         <% @bottom_reviews.each do |review| %>
         <ul>
-          <li>User: <%= review.user %></li>
+          <li>User: <%= link_to review.user, user_path(review.user) %></li>
           <li>Rating: <%= review.rating %></li>
           <li>Title: <%= review.title %></li>
         </ul>
@@ -48,7 +48,7 @@
   <% @book.reviews.each do |review| %>
   <blockquote id="review-<%= review.id %>">
     Title: <%= review.title %><br />
-    User: <%= review.user %><br />
+    User: <%= link_to review.user, user_path(review.user) %><br />
     Rating: <%= review.rating %><br />
     Description: <%= review.description %><br />
   </blockquote>
