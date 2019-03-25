@@ -116,5 +116,71 @@ RSpec.describe 'book: show page', type: :feature do
       expect(page).to_not have_content(@book_1.title)
     end
 
+    describe 'for each author' do
+      it 'displays the author name as a link' do
+        visit book_path(@book_1)
+
+        click_link(@author_1.name)
+        expect(page).to have_current_path(author_path(@author_1))
+      end
+    end
+
+    describe 'for each user' do
+      it 'displays the username as a link' do
+        visit book_path(@book_1)
+        within '#top-reviews' do
+          click_link(@review_1.user)
+          expect(page).to have_current_path(user_path(@review_1.user))
+        end
+
+        visit book_path(@book_1)
+        within '#bottom-reviews' do
+          click_link(@review_1.user)
+          expect(page).to have_current_path(user_path(@review_1.user))
+        end
+
+        visit book_path(@book_1)
+        within '#all-reviews' do
+          click_link(@review_1.user)
+          expect(page).to have_current_path(user_path(@review_1.user))
+        end
+
+        visit book_path(@book_1)
+        within '#top-reviews' do
+          click_link(@review_2.user)
+          expect(page).to have_current_path(user_path(@review_2.user))
+        end
+
+        visit book_path(@book_1)
+        within '#bottom-reviews' do
+          click_link(@review_2.user)
+          expect(page).to have_current_path(user_path(@review_2.user))
+        end
+
+        visit book_path(@book_1)
+        within '#all-reviews' do
+          click_link(@review_2.user)
+          expect(page).to have_current_path(user_path(@review_2.user))
+        end
+
+        visit book_path(@book_1)
+        within '#top-reviews' do
+          click_link(@review_3.user)
+          expect(page).to have_current_path(user_path(@review_3.user))
+        end
+
+        visit book_path(@book_1)
+        within '#bottom-reviews' do
+          click_link(@review_3.user)
+          expect(page).to have_current_path(user_path(@review_3.user))
+        end
+
+        visit book_path(@book_1)
+        within '#all-reviews' do
+          click_link(@review_3.user)
+          expect(page).to have_current_path(user_path(@review_3.user))
+        end
+      end
+    end
   end
 end
