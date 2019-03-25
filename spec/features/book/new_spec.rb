@@ -59,6 +59,7 @@ RSpec.describe 'book: new page', type: :feature do
       click_on "Create Book"
 
       expect(current_path).to eq(new_book_path)
+      expect(page).to have_content("Title has already been taken")
     end
 
     it "will not add an author that already exists" do
@@ -102,6 +103,19 @@ RSpec.describe 'book: new page', type: :feature do
       expect(author_1.id).to_not eq(author_2.id)
       expect(page).to have_content("Larry Niven")
       expect(page).to have_content("Jerry Pournelle")
+    end
+
+    it "will add a book with a default image" do
+
+      visit new_book_path
+
+      fill_in "book[title]", with: "Inferno"
+      fill_in "authors", with: "Larry Niven, Jerry Pournelle"
+      fill_in "book[pages]", with: 237
+      fill_in "book[year_published]", with: 1976
+      click_on "Create Book"
+
+      expect(page).to have_css("img[src*='https://ibf.org/site_assets/img/placeholder-book-cover-default.png']")
     end
   end
 end
