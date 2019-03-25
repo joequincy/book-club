@@ -1,3 +1,6 @@
+<nav class="subnav">
+  <li class="align-right"><%= link_to '- Delete This Author', @author, method: :delete %>%></li>
+</nav>
 <h1><%= @author.name %></h1>
 
 <% @author.books.each do |book| %>
