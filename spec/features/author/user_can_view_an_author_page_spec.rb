@@ -67,4 +67,19 @@ RSpec.describe 'author: show page', type: :feature do
       expect(page).to_not have_content(@review_1.user)
     end
   end
+
+  it 'has a link to delete an author' do
+    visit author_path(@author_1)
+    click_link("- Delete This Author")
+
+    expect(current_path).to eq(books_path)
+    
+    expect(page).to_not have_content(@author_1.name)
+    expect(page).to_not have_content(@book_1.title)
+    expect(page).to_not have_content(@book_2.title)
+    expect(page).to_not have_content(@book_3.title)
+
+    visit author_path(@author_2)
+    expect(page).to have_content(@author_2.name)
+  end
 end
