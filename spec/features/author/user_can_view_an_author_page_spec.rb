@@ -73,7 +73,7 @@ RSpec.describe 'author: show page', type: :feature do
     click_link("- Delete This Author")
 
     expect(current_path).to eq(books_path)
-    
+
     expect(page).to_not have_content(@author_1.name)
     expect(page).to_not have_content(@book_1.title)
     expect(page).to_not have_content(@book_2.title)
@@ -81,5 +81,25 @@ RSpec.describe 'author: show page', type: :feature do
 
     visit author_path(@author_2)
     expect(page).to have_content(@author_2.name)
+  end
+
+  it 'shows user names as a link' do
+    visit author_path(@author_1)
+    click_link(@review_2.user)
+    expect(page).to have_current_path(user_path(@review_2.user))
+  end
+
+  it 'shows book titles as a link' do
+    visit author_path(@author_1)
+    click_link(@book_1.title)
+
+    visit author_path(@author_1)
+    click_link(@book_2.title)
+
+    visit author_path(@author_1)
+    click_link(@book_2.title)
+
+    visit author_path(@author_2)
+    click_link(@book_3.title)
   end
 end
