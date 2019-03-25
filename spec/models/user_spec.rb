@@ -16,11 +16,11 @@ RSpec.describe 'User', type: :model do
       @review_20 = @book_1.reviews.create(user: "Lydia Mora", rating: 4, title: "Lovely",
         description: "The Return of the King...", created_at: 4.days.ago)
 
-      date_sorted_desc = Review.by_date(user: 'Lydia Mora', dir: 'DESC')
+      date_sorted_desc = Review.user_by_date(user: 'Lydia Mora', dir: 'DESC')
       expect(date_sorted_desc.first.description).to eq(@review_07.description)
       expect(date_sorted_desc.last.description).to eq(@review_03.description)
 
-      date_sorted_asc = Review.by_date(user: 'Lydia Mora', dir: 'ASC')
+      date_sorted_asc = Review.user_by_date(user: 'Lydia Mora', dir: 'ASC')
       expect(date_sorted_asc.first.description).to eq(@review_03.description)
       expect(date_sorted_asc.last.description).to eq(@review_07.description)
     end
