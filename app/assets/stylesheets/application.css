@@ -100,7 +100,7 @@ a:hover {
   color: white;
 }
 
-.subnav {
+.subnav, .error {
   margin: 20px;
 }
 
