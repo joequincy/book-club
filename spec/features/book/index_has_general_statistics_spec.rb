@@ -106,4 +106,14 @@ RSpec.describe 'book: index page has statistics', type: :feature do
       expect(page).to have_content("Veronica Morgan : 2 total reviews")
     end
   end
+
+  it 'displays three highest rated authors' do
+    visit books_path
+
+    within '#top_authors' do
+      expect(page).to have_content("J.R.R. Tolkein : Average Rating 4.75")
+      expect(page).to have_content("Larry Niven : Average Rating 3.56")
+      expect(page).to have_content("Jerry Pournelle : Average Rating 1.67")
+    end
+  end
 end
