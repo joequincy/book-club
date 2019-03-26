@@ -25,6 +25,14 @@
     <% end %>
   </section>
 
+  <section id='top_authors' class="stats-content">
+    <h2>Top Authors</h2>
+    <% @top_authors.each do |author| %>
+    <%= link_to author.name, author_path(author) %>
+    <%= ": average rating #{author.avg_rating}" %><br />
+    <% end %>
+  </section>
+
   <section id='top_reviewers' class="stats-content">
     <h2>Top Reviewers</h2>
     <% @top_reviewers.each do |reviewer| %>
