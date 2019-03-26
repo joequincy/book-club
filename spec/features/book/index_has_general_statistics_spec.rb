@@ -72,13 +72,13 @@ RSpec.describe 'book: index page has statistics', type: :feature do
 
     within '#worst_books' do
       expect(page).to have_content(@book_3.title)
-      expect(page).to have_content("Average Rating: #{((3 + 1 + 1)/3.to_f).round(2)}")
+      expect(page).to have_content("Avg Rating: #{((3 + 1 + 1)/3.to_f).round(2)}")
 
       expect(page).to have_content(@book_1.title)
-      expect(page).to have_content("Average Rating: #{((5 + 4 + 4)/3.to_f).round(2)}")
+      expect(page).to have_content("Avg Rating: #{((5 + 4 + 4)/3.to_f).round(2)}")
 
       expect(page).to have_content(@book_6.title)
-      expect(page).to have_content("Average Rating: #{((5 + 5 + 5 + 4 + 4)/5.to_f).round(2)}")
+      expect(page).to have_content("Avg Rating: #{((5 + 5 + 5 + 4 + 4)/5.to_f).round(2)}")
     end
   end
 
@@ -87,13 +87,13 @@ RSpec.describe 'book: index page has statistics', type: :feature do
 
     within '#best_books' do
       expect(page).to have_content(@book_4.title)
-      expect(page).to have_content("Average Rating: #{5.to_f.round(2)}")
+      expect(page).to have_content("Avg Rating: #{5.to_f.round(2)}")
 
       expect(page).to have_content(@book_2.title)
-      expect(page).to have_content("Average Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
+      expect(page).to have_content("Avg Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
 
       expect(page).to have_content(@book_5.title)
-      expect(page).to have_content("Average Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
+      expect(page).to have_content("Avg Rating: #{((5 + 4 + 5)/3.to_f).round(2)}")
     end
   end
 
@@ -101,9 +101,9 @@ RSpec.describe 'book: index page has statistics', type: :feature do
     visit books_path
 
     within '#top_reviewers' do
-      expect(page).to have_content("Lydia Mora : 3 total reviews")
-      expect(page).to have_content("Lukas Bentley : 2 total reviews")
-      expect(page).to have_content("Veronica Morgan : 2 total reviews")
+      expect(page).to have_content("Lydia Mora : 3 reviews")
+      expect(page).to have_content("Lukas Bentley : 2 reviews")
+      expect(page).to have_content("Veronica Morgan : 2 reviews")
     end
   end
 
@@ -111,9 +111,9 @@ RSpec.describe 'book: index page has statistics', type: :feature do
     visit books_path
 
     within '#top_authors' do
-      expect(page).to have_content("J.R.R. Tolkein : average rating 4.75")
-      expect(page).to have_content("Larry Niven : average rating 3.56")
-      expect(page).to have_content("Jerry Pournelle : average rating 1.67")
+      expect(page).to have_content("J.R.R. Tolkein : Avg Rating 4.75")
+      expect(page).to have_content("Larry Niven : Avg Rating 3.56")
+      expect(page).to have_content("Jerry Pournelle : Avg Rating 1.67")
     end
   end
 end
