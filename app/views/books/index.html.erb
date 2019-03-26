@@ -9,17 +9,17 @@
 </nav>
 
 <section class="stats">
-  <section id='worst_books' class="stats-content">
-    <h2>Worst Books</h2>
-    <% @worst_3.each do |book| %>
+  <section id='best_books' class="stats-content">
+    <h2>Best Books</h2>
+    <% @best_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
     Average Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
   </section>
 
-  <section id='best_books' class="stats-content">
-    <h2>Best Books</h2>
-    <% @best_3.each do |book| %>
+  <section id='worst_books' class="stats-content">
+    <h2>Worst Books</h2>
+    <% @worst_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
     Average Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
