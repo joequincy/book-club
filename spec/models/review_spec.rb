@@ -59,7 +59,7 @@ RSpec.describe Review, type: :model do
         description: "The entire time...")
       @review_02 = @book_1.reviews.create(user: "Chris Cobb", rating: 4, title: "Fabulous!",
         description: "Being an engineer by nature...")
-      @review_03 = @book_1.reviews.create(user: "Hattie Le", rating: 5, title: "Outstanding book!",
+      @review_03 = @book_1.reviews.create(user: "Lydia Mora", rating: 5, title: "Outstanding book!",
         description: "The plot makes sense...")
       @review_04 = @book_1.reviews.create(user: "Lukas Bentley", rating: 5, title: "I enjoyed everything about this book",
         description: "The banter of the characters...")
@@ -77,7 +77,7 @@ RSpec.describe Review, type: :model do
         description: "I read this because...")
       @review_11 = @book_1.reviews.create(user: "Veronica Morgan", rating: 5, title: "Loved it!",
         description: "I finished this book...")
-      @review_12 = @book_1.reviews.create(user: "Josie Orozco", rating: 5, title: "Can't believe I took so long to start reading these",
+      @review_12 = @book_1.reviews.create(user: "Veronica Morgan", rating: 5, title: "Can't believe I took so long to start reading these",
         description: "This is my first time...")
       @review_13 = @book_1.reviews.create(user: "Zainab Harrison", rating: 5, title: "Still fantastic!",
         description: "This is at least the...")
@@ -99,9 +99,9 @@ RSpec.describe Review, type: :model do
         description: "Even if you love the...")
 
       top_reviewers = Review.top_reviewers
-      expect(top_reviewers.first).to eq(["Lydia Mora", 3])
-      expect(top_reviewers).to include(["Lukas Bentley", 2])
-      expect(top_reviewers).to include(["Veronica Morgan", 2])
+      expect(top_reviewers.first.user).to eq("Lydia Mora")
+      expect(top_reviewers[1].user).to eq("Veronica Morgan")
+      expect(top_reviewers[2].user).to eq("Lukas Bentley")
     end
   end
 
@@ -127,7 +127,7 @@ RSpec.describe Review, type: :model do
 
         review_1.save
         book.reviews << review_1
-        
+
         review_2 = Review.create(user: "Abby Robinson", title: "Great Book", rating: 5, description: "Description")
         actual = Review.already_exists?(review_2, book)
 
