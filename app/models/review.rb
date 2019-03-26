@@ -21,4 +21,10 @@ class Review < ApplicationRecord
     where(user: user)
    .order('created_at ' + dir)
   end
+
+  def self.user_by_rating(user: nil, dir:)
+    where(user: user)
+   .order('rating ' + dir)
+   .order('created_at ' + dir)
+  end
 end

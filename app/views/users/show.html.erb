@@ -1,6 +1,8 @@
 <nav class="subnav">Sort by:
   <li><%= link_to 'Date (descending)', url_for(sort: 'date') %></li>
   <li><%= link_to 'Date (ascending)', url_for(sort: 'date', direction: 'ASC') %></li>
+  <li><%= link_to 'Rating (descending)', url_for(sort: 'rating') %></li>
+  <li><%= link_to 'Rating (ascending)', url_for(sort: 'rating', direction: 'ASC') %></li>
 </nav>
 <main>
 <% @reviews.each do |review| %>
