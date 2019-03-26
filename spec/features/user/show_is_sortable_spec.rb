@@ -118,4 +118,17 @@ RSpec.describe 'user: show page', type: :feature do
 
     expect(expected_order).to eq(expected_order.sort)
   end
+
+  it 'displays all reviews by user using normal order if invalid sort parameter given' do
+    visit user_path('Lydia Mora', sort: 'nonsense')
+
+    expected_order = [
+      page.body.index(@review_03.description),
+      page.body.index(@review_06.description),
+      page.body.index(@review_07.description),
+      page.body.index(@review_20.description)
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
+  end
 end
