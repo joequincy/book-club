@@ -29,7 +29,7 @@
     <h2>Top Authors</h2>
     <% @top_authors.each do |author| %>
     <%= link_to author.name, author_path(author) %>
-    <%= ": Avg Rating #{author.avg_rating}" %><br />
+    <%= ": Avg Rating #{author.avg_rating.to_f.round(2)}" %><br />
     <% end %>
   </section>
 
