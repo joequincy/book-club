@@ -80,13 +80,39 @@ RSpec.describe 'user: show page', type: :feature do
     expect(expected_order).to eq(expected_order.sort)
   end
 
-  it 'displays all reviews by user sorted by date aescending' do
+  it 'displays all reviews by user sorted by date ascending' do
     visit user_path('Lydia Mora', sort: 'date', direction: 'ASC')
 
     expected_order = [
       page.body.index(@review_03.description),
       page.body.index(@review_07.description),
       page.body.index(@review_20.description),
+      page.body.index(@review_06.description)
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
+  end
+
+  it 'displays all reviews by user sorted by rating descending' do
+    visit user_path('Lydia Mora', sort: 'rating')
+
+    expected_order = [
+      page.body.index(@review_06.description),
+      page.body.index(@review_03.description),
+      page.body.index(@review_20.description),
+      page.body.index(@review_07.description)
+    ]
+
+    expect(expected_order).to eq(expected_order.sort)
+  end
+
+  it 'displays all reviews by user sorted by rating ascending' do
+    visit user_path('Lydia Mora', sort: 'rating', direction: 'ASC')
+
+    expected_order = [
+      page.body.index(@review_07.description),
+      page.body.index(@review_20.description),
+      page.body.index(@review_03.description),
       page.body.index(@review_06.description)
     ]
 
