@@ -19,6 +19,7 @@ class BooksController < ApplicationController
     @worst_3 = Book.worst_3
     @best_3 = Book.best_3
     @top_reviewers = Review.top_reviewers
+    @top_authors = Author.top_rated
   end
 
   def show
