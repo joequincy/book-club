@@ -85,6 +85,12 @@ RSpec.describe 'user: show page', type: :feature do
     expect(page).to have_css("img[src*='#{@review_06.book.thumbnail}']")
   end
 
+  it 'redirects to book index if user does not exist' do
+    visit user_path('Nohbdy')
+
+    expect(page).to have_current_path(books_path)
+  end
+  
   describe 'for each review' do
     it 'displays the book title as a link' do
       visit user_path('Lydia Mora')
@@ -100,5 +106,4 @@ RSpec.describe 'user: show page', type: :feature do
       expect(page).to have_current_path(book_path(@book_6))
     end
   end
-
 end
