@@ -13,7 +13,7 @@
     <h2>Best Books</h2>
     <% @best_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
-    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
+    Avg Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
   </section>
 
@@ -21,7 +21,7 @@
     <h2>Worst Books</h2>
     <% @worst_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
-    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
+    Avg Rating: <%= book.average_rating.to_f.round(2) %><br />
     <% end %>
   </section>
 
@@ -29,7 +29,7 @@
     <h2>Top Authors</h2>
     <% @top_authors.each do |author| %>
     <%= link_to author.name, author_path(author) %>
-    <%= ": average rating #{author.avg_rating}" %><br />
+    <%= ": Avg Rating #{author.avg_rating}" %><br />
     <% end %>
   </section>
 
@@ -37,7 +37,7 @@
     <h2>Top Reviewers</h2>
     <% @top_reviewers.each do |reviewer| %>
     <%= link_to reviewer.user, user_path(reviewer.user) %>
-    <%= ": #{reviewer.review_count} total reviews" %><br />
+    <%= ": #{reviewer.review_count} reviews" %><br />
     <% end %>
   </section>
 </section>
