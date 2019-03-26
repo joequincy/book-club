@@ -128,7 +128,7 @@ a:hover {
   min-width: 200px;
 }
 
-.book-content img, .review-container img {
+.review-container img {
   width: 150px;
   height: auto;
 }
