@@ -172,7 +172,7 @@ a:hover {
 .stats-content {
   background-color: #D9D9D9;
   padding: 20px;
-  width: 27%;
+  width: 20%;
   min-width: 200px;
   display: block;
   justify-content: left;
@@ -181,6 +181,7 @@ a:hover {
   flex-shrink: 1;
   line-height: 1.5em;
   font-size: 17px;
+  box-sizing: border-box;
 }
 
 .review {
@@ -227,4 +228,8 @@ a:hover {
 
 .form {
   align-self: center;
+}
+
+#best_books, #worst_books {
+  min-width: 400px;
 }

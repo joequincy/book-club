@@ -9,19 +9,27 @@
 </nav>
 
 <section class="stats">
-  <section id='worst_books' class="stats-content">
-    <h2>Worst Books</h2>
-    <% @worst_3.each do |book| %>
-    <%= link_to book.title, book_path(book) %> |
-    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
-    <% end %>
-  </section>
-
   <section id='best_books' class="stats-content">
     <h2>Best Books</h2>
     <% @best_3.each do |book| %>
     <%= link_to book.title, book_path(book) %> |
-    Average Rating: <%= book.average_rating.to_f.round(2) %><br />
+    Avg Rating: <%= book.average_rating.to_f.round(2) %><br />
+    <% end %>
+  </section>
+
+  <section id='worst_books' class="stats-content">
+    <h2>Worst Books</h2>
+    <% @worst_3.each do |book| %>
+    <%= link_to book.title, book_path(book) %> |
+    Avg Rating: <%= book.average_rating.to_f.round(2) %><br />
+    <% end %>
+  </section>
+
+  <section id='top_authors' class="stats-content">
+    <h2>Top Authors</h2>
+    <% @top_authors.each do |author| %>
+    <%= link_to author.name, author_path(author) %>
+    <%= ": Avg Rating #{author.avg_rating.to_f.round(2)}" %><br />
     <% end %>
   </section>
 
@@ -29,7 +37,7 @@
     <h2>Top Reviewers</h2>
     <% @top_reviewers.each do |reviewer| %>
     <%= link_to reviewer.user, user_path(reviewer.user) %>
-    <%= ": #{reviewer.review_count} total reviews" %><br />
+    <%= ": #{reviewer.review_count} reviews" %><br />
     <% end %>
   </section>
 </section>
