@@ -84,4 +84,10 @@ RSpec.describe 'user: show page', type: :feature do
     expect(page).to have_css(".review-timestamp:not(:empty)")
     expect(page).to have_css("img[src*='#{@review_06.book.thumbnail}']")
   end
+
+  it 'redirects to book index if user does not exist' do
+    visit user_path('Nohbdy')
+
+    expect(page).to have_current_path(books_path)
+  end
 end
