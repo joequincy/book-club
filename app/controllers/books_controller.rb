@@ -36,13 +36,17 @@ class BooksController < ApplicationController
       session[:book] = nil
       session[:authors] = nil
       @book.valid?
+      if !authors_valid?(@authors)
+        @book.errors.add(:base, :book_needs_at_least_one_author,
+        message: "Author(s) must not be empty")
+      end
     end
   end
 
   def create
     author_names = params[:authors].split(',')
     @book = Book.new(book_params)
-    if @book.save
+    if authors_valid?(params[:authors]) && @book.save
       assign_book_to_author(author_names, @book)
       redirect_to book_path(@book.id)
     else
@@ -75,5 +79,10 @@ class BooksController < ApplicationController
       bp[:thumbnail] = "https://ibf.org/site_assets/img/placeholder-book-cover-default.png"
     end
     bp
+  end
+
+  def authors_valid?(author_string)
+    authors = author_string.split(',')
+    (authors.length > 0 && authors[0].strip.length > 0)
   end
 end
