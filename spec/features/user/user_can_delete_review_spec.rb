@@ -19,7 +19,7 @@ RSpec.describe 'user: delete reviews', type: :feature do
   it 'should allow user to delete review' do
     visit user_path('Lydia Mora')
 
-    click_on("#delete-review-#{@review_03.id}")
+    click_on("delete-review-#{@review_03.id}")
 
     expect(page).to_not have_content("The plot makes sense")
   end
@@ -27,11 +27,11 @@ RSpec.describe 'user: delete reviews', type: :feature do
   it 'should redirect to main page if user has no more reviews' do
     visit user_path('Lydia Mora')
 
-    click_on("#delete-review-#{@review_03.id}")
-    click_on("#delete-review-#{@review_06.id}")
-    click_on("#delete-review-#{@review_07.id}")
-    click_on("#delete-review-#{@review_20.id}")
+    click_on("delete-review-#{@review_03.id}")
+    click_on("delete-review-#{@review_06.id}")
+    click_on("delete-review-#{@review_07.id}")
+    click_on("delete-review-#{@review_20.id}")
 
-    expect(page).to have_current_path(book_path)
+    expect(page).to have_current_path(books_path)
   end
 end
