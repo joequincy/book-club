@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'user: delete reviews', type: :model do
+RSpec.describe 'user: delete reviews', type: :feature do
 
   before(:each) do
     @author_1 = Author.create(name: "Larry Niven")
@@ -17,7 +17,7 @@ RSpec.describe 'user: delete reviews', type: :model do
   end
 
   it 'should allow user to delete review' do
-    visit users_path('Lydia Mora')
+    visit user_path('Lydia Mora')
 
     click_on("#delete-review-#{@review_03.id}")
 
@@ -25,7 +25,7 @@ RSpec.describe 'user: delete reviews', type: :model do
   end
 
   it 'should redirect to main page if user has no more reviews' do
-    visit users_path('Lydia Mora')
+    visit user_path('Lydia Mora')
 
     click_on("#delete-review-#{@review_03.id}")
     click_on("#delete-review-#{@review_06.id}")
