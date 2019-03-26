@@ -6,5 +6,8 @@ class UsersController < ApplicationController
     else
       Review.where(user: params[:id])
     end
+    if @reviews.size == 0
+      redirect_to books_path
+    end
   end
 end
