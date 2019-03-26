@@ -22,6 +22,10 @@
       </span>
     </p>
     <p><%= review.description %></p>
+    <%= link_to '- Delete This Review',
+                review_path(review.id, user: review.user),
+                id: "delete-review-#{review.id}",
+                method: :delete %>
   </section>
 </section>
 <% end %>
