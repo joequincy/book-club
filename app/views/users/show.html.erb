@@ -4,6 +4,7 @@
   <li><%= link_to 'Rating (descending)', url_for(sort: 'rating') %></li>
   <li><%= link_to 'Rating (ascending)', url_for(sort: 'rating', direction: 'ASC') %></li>
 </nav>
+<h1><%= @reviews.first.user %></h1>
 <main>
 <% @reviews.each do |review| %>
 <section class='review-container'>
