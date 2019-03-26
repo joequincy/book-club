@@ -117,5 +117,18 @@ RSpec.describe 'book: new page', type: :feature do
 
       expect(page).to have_css("img[src*='https://ibf.org/site_assets/img/placeholder-book-cover-default.png']")
     end
+
+    it "requires at least one author" do
+      visit new_book_path
+
+      fill_in "book[title]", with: "The Return Of The King"
+      fill_in "book[pages]", with: 416
+      fill_in "book[year_published]", with: 1955
+      fill_in "book[thumbnail]", with: "https://upload.wikimedia.org/wikipedia/en/1/11/The_Return_of_the_King_cover.gif"
+      click_on "Create Book"
+
+      expect(page).to have_current_path(new_book_path)
+      expect(page).to have_content("Author(s) must not be empty")
+    end
   end
 end
