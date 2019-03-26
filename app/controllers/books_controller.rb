@@ -29,26 +29,29 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @authors = ""
+    if session[:book]
+      @book = Book.new(session[:book])
+      @authors = session[:authors]
+      session[:book] = nil
+      session[:authors] = nil
+      @book.valid?
+    end
   end
 
   def create
     author_names = params[:authors].split(',')
-    book = Book.new(book_params)
-    if Book.already_exists?(book)
-      redirect_to new_book_path
+    @book = Book.new(book_params)
+    if @book.save
+      assign_book_to_author(author_names, @book)
+      redirect_to book_path(@book.id)
     else
-    book.save
-    assign_book_to_author(author_names, book)
-    redirect_to book_path(book.id)
+      session[:book] = params[:book]
+      session[:authors] = params[:authors]
+      redirect_to new_book_path
     end
   end
 
-  def assign_book_to_author(author_names, book)
-    author_names.each do |name|
-      author = Author.find_or_create_by(name: name.strip)
-      author.books << book
-    end
-  end
 
   def destroy
     @book = Book.find(params[:id])
@@ -58,7 +61,19 @@ class BooksController < ApplicationController
 
   private
 
+  def assign_book_to_author(author_names, book)
+    author_names.each do |name|
+      author = Author.find_or_create_by(name: name.strip)
+      author.books << book
+    end
+  end
+
   def book_params
-    params.require(:book).permit(:title, :authors, :pages, :year_published, :thumbnail)
+    bp = params.require(:book).permit(:title, :authors, :pages, :year_published, :thumbnail)
+    bp[:title] = bp[:title].titleize
+    if bp[:thumbnail] == ""
+      bp[:thumbnail] = "https://ibf.org/site_assets/img/placeholder-book-cover-default.png"
+    end
+    bp
   end
 end
