@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
   resources :authors, only: [:show, :destroy]
-  resources :reviews, only: [:new, :create]
+  resources :reviews, only: [:new, :create, :destroy]
 
   resources :users, only: [:show]
 end
