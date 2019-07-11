@@ -14,6 +14,7 @@ You will need [Bundler](https://bundler.io/). From the project root, run:
 - `bundle install`
 - `rake db:{create,migrate,seed}`
 - `rails s`
+
 Visit `localhost:3000` in your web browser.
 
 
